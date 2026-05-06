@@ -88,6 +88,43 @@ A complexidade determina o nível de cerimônia na avaliação pós-implementaç
 
 > Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
 
+### TASK-004
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-05
+
+#### Objetivo (!obrigatório)
+Adicionar configuração para OpenAI Codex no projeto, similar aos arquivos existentes para outros agentes de IA.
+
+#### Contexto (!obrigatório)
+O projeto possui pontos de entrada para Claude Code, Cursor, Windsurf e GitHub Copilot, mas faltava a configuração para o OpenAI Codex CLI.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** AGENTS.md (novo), CONTRIBUTING.md (atualização)
+- **Dependências necessárias:** nenhuma
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [x] AGENTS.md criado com instruções para Codex
+- [x] CONTRIBUTING.md atualizado com Codex na tabela de IDEs
+- [x] Estrutura consistente com os demais arquivos de configuração
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-05 | 1 | AGENTS.md criado, CONTRIBUTING.md atualizado | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-05
+- **Branch:** chore/TASK-004-codex-config
+- **Commit(s):** dfa13b2, 2f91dbf
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Codex agora suportado via AGENTS.md. Checklist agêntico: aplicado.
+
+---
+
 ### TASK-003
 - **Status:** concluída
 - **Modo:** desenvolvimento
