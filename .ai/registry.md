@@ -1,54 +1,54 @@
-# Registro de Projeto — Estado e Historico
+# Registro de Projeto — Estado e Histórico
 
-> Este arquivo contem o estado atual e historico do projeto. E atualizado pelo agente ao final de cada implementacao.
-> As **regras** sobre como atualizar este registro estao em `.ai/rules/08-registro-projeto.md`.
+> Este arquivo contém o estado atual e histórico do projeto. É atualizado pelo agente ao final de cada implementação.
+> As **regras** sobre como atualizar este registro estão em `.ai/rules/08-registro-projeto.md`.
 
 ---
 
-## Informacoes do Projeto
+## Informações do Projeto
 
 - **Nome:** agr1model
 - **Stack:** JavaScript (Google Earth Engine)
-- **Repositorio:** LukeSantossz/agr1model
+- **Repositório:** LukeSantossz/agr1model
 - **Estrutura:** Scripts GEE para NDWI — scripts/ndwi/, scripts/utils/, docs/, data/
 
-## Historico de Implementacoes
+## Histórico de Implementações
 
-> Registro de conclusoes. Cada entrada representa uma task finalizada. O agente adiciona uma nova linha apos cada task concluida. Nunca remova entradas anteriores.
+> Registro de conclusões. Cada entrada representa uma task finalizada. O agente adiciona uma nova linha após cada task concluída. Nunca remova entradas anteriores.
 
-| # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observacoes |
+| # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observações |
 |---|------|------|--------------|-----------------|-----------|-------------|
-| — | — | — | — | — | — | Nenhuma implementacao registrada |
+| — | — | — | — | — | — | Nenhuma implementação registrada |
 
 ## Estado da Codebase
 
-> Atualizado a cada implementacao ou verificacao pos-pull. Reflete o snapshot mais recente do projeto.
+> Atualizado a cada implementação ou verificação pós-pull. Reflete o snapshot mais recente do projeto.
 
-- **Ultima atualizacao:** 2026-04-29
-- **Ultimo responsavel:** —
-- **Branch ativa:** main
-- **Ultima task concluida:** —
+- **Última atualização:** 2026-05-05
+- **Último responsável:** —
+- **Branch ativa:** refactor/TASK-001-sync-ai-rules
+- **Última task concluída:** —
 
-## Pendencias Conhecidas
-
-- [nenhuma registrada]
-
-## Decisoes Tecnicas Relevantes
-
-> Decisoes tomadas durante implementacoes que afetam futuras tasks. Inclua justificativa breve.
+## Pendências Conhecidas
 
 - [nenhuma registrada]
 
-## Padroes Recorrentes Observados
+## Decisões Técnicas Relevantes
 
-| Padrao | Frequencia | Impacto | Acao Corretiva |
+> Decisões tomadas durante implementações que afetam futuras tasks. Inclua justificativa breve.
+
+- [nenhuma registrada]
+
+## Padrões Recorrentes Observados
+
+| Padrão | Frequência | Impacto | Ação Corretiva |
 |--------|------------|---------|----------------|
 | — | — | — | — |
 
 ---
 
-## Notas de Sessao
+## Notas de Sessão
 
-> Espaco para anotacoes pontuais sobre contextos que influenciam futuras sessoes.
+> Espaço para anotações pontuais sobre contextos que influenciam futuras sessões.
 
 [nenhuma nota registrada]
