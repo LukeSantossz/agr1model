@@ -79,6 +79,7 @@ This project is configured for multiple AI-powered IDEs. Each tool reads project
 | IDE | Configuration File | How to Use |
 |-----|-------------------|------------|
 | **Claude Code** | `CLAUDE.md` | Open terminal, run `claude` in project root |
+| **OpenAI Codex** | `AGENTS.md` | Open terminal, run `codex` in project root |
 | **Cursor** | `.cursorrules` | Open project in Cursor — rules load automatically |
 | **Windsurf** | `.windsurfrules` | Open project in Windsurf — rules load automatically |
 | **GitHub Copilot** | `.github/copilot-instructions.md` | Works in VS Code/JetBrains with Copilot extension |
@@ -133,6 +134,29 @@ claude
 
 # Declare mode when prompted
 > Modo: desenvolvimento
+```
+
+### Setting Up OpenAI Codex
+
+```bash
+# Install Codex CLI
+npm install -g @openai/codex
+
+# Navigate to project
+cd agr1model
+
+# Start session (reads AGENTS.md automatically)
+codex
+
+# Or start in full-auto mode
+codex --approval-mode full-auto
+```
+
+**Configuration options** in `.codex/config.toml`:
+
+```toml
+model = "codex-1"
+approval_mode = "suggest"
 ```
 
 ### Setting Up Cursor
