@@ -18,6 +18,11 @@
 
 | # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observações |
 |---|------|------|--------------|-----------------|-----------|-------------|
+| 9 | 2026-05-05 | TASK-009 | minor | 1 arquivo — scripts/ndwi/04_hotspots_analise.js | aprovado | Ranking municipios, hotspots P90 |
+| 8 | 2026-05-05 | TASK-008 | minor | 1 arquivo — scripts/ndwi/03_variacao_temporal.js | aprovado | Variacao 2015-2025, histograma |
+| 7 | 2026-05-05 | TASK-007 | minor | 1 arquivo — scripts/ndwi/02_media_anual.js | aprovado | Serie temporal, graficos |
+| 6 | 2026-05-05 | TASK-006 | major | 2 arquivos — scripts/ndwi/, scripts/utils/ | aprovado | Pipeline NDWI Sentinel-2 |
+| 5 | 2026-05-05 | TASK-005 | patch | 1 arquivo — docs/gee-assets-setup.md | aprovado | Setup GEE Assets |
 | 4 | 2026-05-05 | TASK-004 | minor | 2 arquivos — AGENTS.md, CONTRIBUTING.md | aprovado | Checklist agêntico: aplicado |
 | 3 | 2026-05-05 | TASK-003 | minor | 1 arquivo — CONTRIBUTING.md | aprovado | Checklist agêntico: aplicado |
 | 2 | 2026-05-05 | TASK-002 | minor | 1 arquivo — README.md | aprovado | Checklist agêntico: aplicado |
@@ -29,8 +34,8 @@
 
 - **Última atualização:** 2026-05-05
 - **Último responsável:** Claude Code (Opus 4.5)
-- **Branch ativa:** chore/TASK-004-codex-config
-- **Última task concluída:** TASK-004
+- **Branch ativa:** main
+- **Última task concluída:** TASK-009
 
 ## Pendências Conhecidas
 

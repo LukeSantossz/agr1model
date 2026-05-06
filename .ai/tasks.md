@@ -84,6 +84,206 @@ A complexidade determina o nível de cerimônia na avaliação pós-implementaç
 > Tasks em andamento ou pendentes de implementação. O agente só pode trabalhar em tasks listadas aqui.
 > **Regra de ordenação:** A primeira task listada é a task ativa. O agente trabalha nela até conclusão, descarte ou bloqueio explícito pelo usuário. Para mudar a prioridade, o usuário reordena as tasks nesta seção.
 
+### TASK-005
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** patch
+- **Data de criação:** 2026-05-05
+
+#### Objetivo (!obrigatório)
+Criar documentação de setup para upload dos shapefiles de SP para GEE Assets.
+
+#### Contexto (!obrigatório)
+Os shapefiles do estado de São Paulo (SP_UF_2024.zip, SP_Municipios_2024.zip, etc.) precisam ser carregados como Assets no GEE para serem utilizados nos scripts de análise NDWI.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** docs/gee-assets-setup.md (novo)
+- **Dependências necessárias:** nenhuma
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Documentação criada com instruções de upload para GEE
+- [x] Asset IDs documentados para uso nos scripts
+- [x] Instruções para extração dos .zip e upload via Code Editor
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-05 | 1 | Criado docs/gee-assets-setup.md | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-05
+- **Branch:** main
+- **Commit(s):** pendente
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Documentação completa com Asset IDs e instruções de upload
+
+---
+
+### TASK-006
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** major
+- **Data de criação:** 2026-05-05
+
+#### Objetivo (!obrigatório)
+Criar script GEE que coleta imagens Sentinel-2 (2015-2025) para SP e calcula NDWI para cada cena.
+
+#### Contexto (!obrigatório)
+Base do projeto de análise temporal de NDWI. O script deve filtrar a coleção Sentinel-2, aplicar máscara de nuvens, calcular NDWI usando bandas Green (B3) e NIR (B8), e recortar para a área de SP usando o shapefile carregado.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** scripts/ndwi/01_coleta_ndwi.js (novo), scripts/utils/sentinel2_utils.js (novo)
+- **Dependências necessárias:** Asset SP_UF_2024 no GEE
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Script carrega shapefile de SP do GEE Assets
+- [x] Filtra Sentinel-2 por data (2015-06-01 a 2025-12-31) e área
+- [x] Aplica máscara de nuvens usando banda QA60
+- [x] Calcula NDWI = (Green - NIR) / (Green + NIR)
+- [x] Exporta coleção de imagens NDWI recortadas para SP
+- [x] Comentários em PT-BR explicando cada linha
+
+#### Restrições (opcional)
+- Usar Sentinel-2 Surface Reflectance (COPERNICUS/S2_SR_HARMONIZED)
+- Comentários obrigatórios em português
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-05 | 1 | Criados sentinel2_utils.js e 01_coleta_ndwi.js | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-05
+- **Branch:** main
+- **Commit(s):** pendente
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Modulo utils com funcoes reutilizaveis. Script 01 com pipeline completo.
+
+---
+
+### TASK-007
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-05
+
+#### Objetivo (!obrigatório)
+Criar script que gera imagens de média anual de NDWI para cada ano (2015-2025).
+
+#### Contexto (!obrigatório)
+Para análise temporal, é necessário agregar as imagens NDWI em composições anuais usando a média. Isso reduz ruído e permite comparação entre anos.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** scripts/ndwi/02_media_anual.js (novo)
+- **Dependências necessárias:** Script 01_coleta_ndwi.js
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Gera uma imagem de média NDWI para cada ano (2015-2025)
+- [x] Cria ImageCollection com as 11 imagens anuais
+- [x] Visualização no mapa com paleta de cores apropriada
+- [x] Exporta imagens anuais como Assets ou Drive
+- [x] Comentários em PT-BR explicando cada linha
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-05 | 1 | Criado 02_media_anual.js com grafico temporal | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-05
+- **Branch:** main
+- **Commit(s):** pendente
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Inclui grafico de serie temporal e estatisticas por ano
+
+---
+
+### TASK-008
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-05
+
+#### Objetivo (!obrigatório)
+Criar script que calcula diferença de NDWI entre 2015 e 2025, identificando incremento/decremento.
+
+#### Contexto (!obrigatório)
+Análise de variação temporal para responder: "Houve aumento ou redução no índice de água para SP no período analisado?" e "Quais regiões tiveram incremento ou decremento?"
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** scripts/ndwi/03_variacao_temporal.js (novo)
+- **Dependências necessárias:** Script 02_media_anual.js
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Calcula diferença: NDWI_2025 - NDWI_2015
+- [x] Classifica pixels em: incremento (>0), estável (~0), decremento (<0)
+- [x] Gera estatísticas de área para cada classe
+- [x] Visualização com cores divergentes (azul=aumento, vermelho=redução)
+- [x] Responde se houve aumento ou redução geral no estado
+- [x] Comentários em PT-BR explicando cada linha
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-05 | 1 | Criado 03_variacao_temporal.js com histograma | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-05
+- **Branch:** main
+- **Commit(s):** pendente
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Inclui classificacao em 3 classes e histograma de variacao
+
+---
+
+### TASK-009
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-05
+
+#### Objetivo (!obrigatório)
+Criar script que identifica regiões com valores extremos e mudanças significativas no período.
+
+#### Contexto (!obrigatório)
+Análise de hotspots para responder: "Há regiões que se destacam com valores muito maiores?" e "Houve regiões que se destacaram por aumento do decremento nos últimos 10 anos?"
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** scripts/ndwi/04_hotspots_analise.js (novo)
+- **Dependências necessárias:** Scripts 02 e 03
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Identifica regiões com NDWI médio acima do percentil 90 (hotspots de água)
+- [x] Identifica regiões com maior variação positiva (ganho de água)
+- [x] Identifica regiões com maior variação negativa (perda de água)
+- [x] Análise por município ou região geográfica de SP
+- [x] Gera gráficos/charts comparativos
+- [x] Comentários em PT-BR explicando cada linha
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-05 | 1 | Criado 04_hotspots_analise.js com ranking de municipios | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-05
+- **Branch:** main
+- **Commit(s):** pendente
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Inclui ranking top 10 municipios, graficos e exportacao CSV
+
+---
+
 ## Tasks Concluídas
 
 > Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
