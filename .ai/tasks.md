@@ -84,8 +84,14 @@ A complexidade determina o nível de cerimônia na avaliação pós-implementaç
 > Tasks em andamento ou pendentes de implementação. O agente só pode trabalhar em tasks listadas aqui.
 > **Regra de ordenação:** A primeira task listada é a task ativa. O agente trabalha nela até conclusão, descarte ou bloqueio explícito pelo usuário. Para mudar a prioridade, o usuário reordena as tasks nesta seção.
 
+---
+
+## Tasks Concluídas
+
+> Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
+
 ### TASK-001
-- **Status:** em andamento
+- **Status:** concluída
 - **Modo:** desenvolvimento
 - **Complexidade:** major
 - **Data de criação:** 2026-05-05
@@ -129,21 +135,14 @@ Auditoria identificou divergências significativas entre as duas pastas:
 | Data | Sessão | Ação Realizada | Status ao Final |
 |------|--------|----------------|-----------------|
 | 2026-05-05 | 1 | Criado tasks.md, iniciando sincronização | em andamento |
+| 2026-05-05 | 1 | Sincronização completa, 7 commits atômicos realizados | concluída |
 
 #### Resultado (preenchido ao concluir)
-- **Data de conclusão:** —
-- **Branch:** —
-- **Commit(s):** —
-- **Avaliação pós-implementação:** —
-- **Observações:** —
-
----
-
-## Tasks Concluídas
-
-> Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
-
-[nenhuma task concluída]
+- **Data de conclusão:** 2026-05-05
+- **Branch:** refactor/TASK-001-sync-ai-rules
+- **Commit(s):** 01a3f29, c2c0c47, 1df471f, b286771, 3f1ecca, 8271213, 124d1b7
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Sincronização bem-sucedida. 13 arquivos de regras atualizados/criados + 2 templates + registry. Checklist agêntico: aplicado.
 
 ---
 

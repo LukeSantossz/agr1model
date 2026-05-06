@@ -18,16 +18,16 @@
 
 | # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observações |
 |---|------|------|--------------|-----------------|-----------|-------------|
-| — | — | — | — | — | — | Nenhuma implementação registrada |
+| 1 | 2026-05-05 | TASK-001 | major | 16 arquivos — .ai/rules/, .ai/ | aprovado | Checklist agêntico: aplicado |
 
 ## Estado da Codebase
 
 > Atualizado a cada implementação ou verificação pós-pull. Reflete o snapshot mais recente do projeto.
 
 - **Última atualização:** 2026-05-05
-- **Último responsável:** —
+- **Último responsável:** Claude Code (Opus 4.5)
 - **Branch ativa:** refactor/TASK-001-sync-ai-rules
-- **Última task concluída:** —
+- **Última task concluída:** TASK-001
 
 ## Pendências Conhecidas
 
@@ -37,7 +37,7 @@
 
 > Decisões tomadas durante implementações que afetam futuras tasks. Inclua justificativa breve.
 
-- [nenhuma registrada]
+- **Sincronização .ai/rules/ com .claude_config/rules/:** As regras em `.ai/rules/` agora refletem a metodologia genérica (não específica GEE) de `.claude_config/rules/`. Inclui novas regras 10-12 (Engenharia Agêntica, Codex, Portfólio). Commits em inglês seguindo Conventional Commits.
 
 ## Padrões Recorrentes Observados
 
