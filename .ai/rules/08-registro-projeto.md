@@ -1,49 +1,49 @@
-# 8. Registro de Projeto — Regras de Atualizacao
+# 8. Registro de Projeto — Regras de Atualização
 
-> **O registro de projeto (`.ai/registry.md`) e mandatorio.** O agente DEVE atualiza-lo ao final de cada implementacao concluida com sucesso. Implementacao sem registro subsequente e considerada incompleta.
+> **O registro de projeto (`registry.md`) é mandatório.** O agente DEVE atualizá-lo ao final de cada implementação concluída com sucesso. Implementação sem registro subsequente é considerada incompleta.
 
-## 8.1 Apos Cada Implementacao
+## 8.1 Após Cada Implementação
 
-O agente deve, imediatamente apos a avaliacao pos-implementacao, atualizar o `.ai/registry.md` com:
+O agente deve, imediatamente após a avaliação pós-implementação, atualizar o `registry.md` com:
 
-- Entrada no Historico de Implementacoes com a task concluida.
-- Estado atual da codebase (arquivos alterados).
-- Pendencias conhecidas, se houver.
-- Decisoes tecnicas tomadas durante a implementacao.
+- Entrada no Histórico de Implementações com a task concluída.
+- Estado atual da codebase (arquivos alterados, dependências adicionadas/removidas).
+- Pendências conhecidas, se houver.
+- Decisões técnicas tomadas durante a implementação.
 
-Esta atualizacao e a ultima etapa do ciclo. O agente nao pode considerar a task finalizada sem ela.
+Esta atualização é a última etapa do ciclo. O agente não pode considerar a task finalizada sem ela.
 
-## 8.2 Ao Iniciar uma Nova Sessao
+## 8.2 Ao Iniciar uma Nova Sessão
 
-Antes de qualquer acao, o agente deve ler o `.ai/registry.md` e validar:
+Antes de qualquer ação, o agente deve ler o `registry.md` e validar:
 
-- Qual foi a ultima implementacao registrada.
-- Se ha pendencias documentadas da sessao anterior.
-- Se o estado registrado e compativel com a nova task.
+- Qual foi a última implementação registrada.
+- Se há pendências documentadas da sessão anterior.
+- Se o estado registrado é compatível com a nova task.
 
-## 8.3 Ao Executar Pull, Merge ou Qualquer Acao que Altera a Codebase Externamente
+## 8.3 Ao Executar Pull, Merge ou Qualquer Ação que Altera a Codebase Externamente
 
-Quando o usuario indicar que houve alteracoes externas (pull, merge, rebase, contribuicao de terceiros), o agente deve:
+Quando o usuário indicar que houve alterações externas (pull, merge, rebase, contribuição de terceiros), o agente deve:
 
 1. Executar o reconhecimento da codebase novamente.
-2. Comparar o estado atual com o ultimo estado registrado.
-3. Registrar as divergencias encontradas no `.ai/registry.md`.
-4. Avaliar se as mudancas externas impactam a task atual ou tasks pendentes.
-5. Reportar ao usuario qualquer conflito ou incompatibilidade antes de prosseguir.
+2. Comparar o estado atual com o último estado registrado.
+3. Registrar as divergências encontradas no `registry.md`.
+4. Avaliar se as mudanças externas impactam a task atual ou tasks pendentes.
+5. Reportar ao usuário qualquer conflito ou incompatibilidade antes de prosseguir.
 
 ```
-VERIFICACAO DE ESTADO POS-PULL
-Estado registrado: [ultima implementacao registrada]
-Estado atual: [resumo das mudancas detectadas]
-Divergencias: [listar ou "nenhuma"]
-Impacto na task atual: [sim/nao — se sim, detalhar]
-Decisao: [seguro para prosseguir / requer atencao do usuario]
+VERIFICAÇÃO DE ESTADO PÓS-PULL
+Estado registrado: [última implementação registrada]
+Estado atual: [resumo das mudanças detectadas]
+Divergências: [listar ou "nenhuma"]
+Impacto na task atual: [sim/não — se sim, detalhar]
+Decisão: [seguro para prosseguir / requer atenção do usuário]
 ```
 
-## 8.4 Politica de Arquivamento
+## 8.4 Política de Arquivamento
 
-Quando o historico ultrapassar 30 entradas, o agente deve mover as entradas mais antigas (mantendo as 15 mais recentes) para o arquivo `registry-archive.md` na mesma pasta. O arquivo de arquivo e cumulativo e nunca editado apos a insercao.
+Quando o histórico ultrapassar 30 entradas, o agente deve mover as entradas mais antigas (mantendo as 15 mais recentes) para o arquivo `registry-archive.md` na mesma pasta. O arquivo de arquivo é cumulativo e nunca editado após a inserção. Ao verificar histórico, o agente consulta ambos os arquivos se necessário.
 
 ## 8.5 Formato do Escopo Alterado
 
-Registre de forma resumida — quantidade de arquivos e pasta afetada. Ex: "2 arquivos — scripts/ndwi", "1 arquivo — scripts/utils". O detalhamento completo fica no diff do commit.
+Registre de forma resumida — quantidade de arquivos e módulo afetado. Ex: "3 arquivos — módulo auth", "1 arquivo — config". O detalhamento completo de arquivos fica no Log de Andamento da task em `tasks.md` e no diff do commit.
