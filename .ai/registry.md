@@ -18,6 +18,7 @@
 
 | # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observações |
 |---|------|------|--------------|-----------------|-----------|-------------|
+| 3 | 2026-05-05 | TASK-003 | minor | 1 arquivo — CONTRIBUTING.md | aprovado | Checklist agêntico: aplicado |
 | 2 | 2026-05-05 | TASK-002 | minor | 1 arquivo — README.md | aprovado | Checklist agêntico: aplicado |
 | 1 | 2026-05-05 | TASK-001 | major | 16 arquivos — .ai/rules/, .ai/ | aprovado | Checklist agêntico: aplicado |
 
@@ -27,8 +28,8 @@
 
 - **Última atualização:** 2026-05-05
 - **Último responsável:** Claude Code (Opus 4.5)
-- **Branch ativa:** docs/TASK-002-readme-portfolio
-- **Última task concluída:** TASK-002
+- **Branch ativa:** docs/TASK-003-contributing-guide
+- **Última task concluída:** TASK-003
 
 ## Pendências Conhecidas
 

@@ -88,6 +88,44 @@ A complexidade determina o nível de cerimônia na avaliação pós-implementaç
 
 > Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
 
+### TASK-003
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-05
+
+#### Objetivo (!obrigatório)
+Criar CONTRIBUTING.md com orientações de contribuição e instruções para uso de IDEs com IA.
+
+#### Contexto (!obrigatório)
+O projeto possui múltiplos pontos de entrada para agentes de IA mas não havia documentação consolidada para contribuidores.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** CONTRIBUTING.md (novo)
+- **Dependências necessárias:** nenhuma
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [x] CONTRIBUTING.md criado em inglês
+- [x] Seção de configuração por IDE (Claude Code, Cursor, Windsurf, GitHub Copilot)
+- [x] Referência às regras em .ai/rules/
+- [x] Instruções de workflow (task → branch → commit → PR)
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-05 | 1 | CONTRIBUTING.md criado com guias de IDE | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-05
+- **Branch:** docs/TASK-003-contributing-guide
+- **Commit(s):** 543cb1b
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Inclui setup para Claude Code, Cursor, Windsurf, GitHub Copilot. Checklist agêntico: aplicado.
+
+---
+
 ### TASK-002
 - **Status:** concluída
 - **Modo:** desenvolvimento
