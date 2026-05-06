@@ -1,63 +1,71 @@
-# 5. Convencoes de Codigo
+# 5. Convenções de Código
 
 ## 5.1 Nomenclatura — VAR Method
 
-O VAR Method e complementar as convencoes ja existentes no projeto, nao substituto. Se o projeto ja possui padroes de nomenclatura estabelecidos, eles tem precedencia. Os sufixos abaixo se aplicam quando nao ha convencao previa ou quando a convencao existente nao cobre o caso.
+O VAR Method é complementar às convenções já existentes no projeto, não substituto. Se o projeto já possui padrões de nomenclatura estabelecidos, eles têm precedência. Os sufixos abaixo se aplicam quando não há convenção prévia ou quando a convenção existente não cobre o caso.
 
-**Sufixos primarios:**
-
-| Sufixo | Significado | Uso |
-|--------|-------------|-----|
-| `Data` | Dados brutos | Informacoes cruas, colecoes de imagens, valores de pixels. Ex: `ndwiData`, `precipitationData` |
-| `Info` | Metadados | Dados processados, resumos descritivos, configuracao. Ex: `sensorInfo`, `regionInfo` |
-| `Collection` | Colecao | Colecoes de imagens GEE. Ex: `sentinelCollection`, `landsatCollection` |
-| `Image` | Imagem | Imagens individuais ou composites. Ex: `ndwiImage`, `medianImage` |
-
-**Sufixos estendidos (aplicar conforme necessidade):**
+**Sufixos primários:**
 
 | Sufixo | Significado | Uso |
 |--------|-------------|-----|
-| `Geometry` | Geometria | Regioes de interesse, pontos, poligonos. Ex: `studyAreaGeometry` |
-| `Filter` | Filtro | Filtros temporais, espaciais ou por propriedade. Ex: `dateFilter`, `cloudFilter` |
-| `Reducer` | Redutor | Operacoes de reducao sobre colecoes. Ex: `meanReducer`, `medianReducer` |
-| `Chart` | Grafico | Series temporais e visualizacoes. Ex: `ndwiChart`, `timeSeriesChart` |
-| `Params` | Parametros | Parametros de visualizacao ou exportacao. Ex: `visParams`, `exportParams` |
+| `Data` | Dados brutos | Informações cruas, payloads, atributos simples de objetos. Ex: `userData`, `paymentData` |
+| `Info` | Metadados | Dados processados, resumos descritivos, configuração. Ex: `systemInfo`, `accountInfo` |
+| `Manager` | Gerenciador | Classes ou objetos que orquestram processos, estados e conexões. Ex: `SessionManager` |
+| `Handler` | Manipulador | Funções que reagem a eventos específicos. Ex: `onClickHandler`, `submitFormHandler` |
+
+**Sufixos estendidos (aplicar conforme a arquitetura do projeto):**
+
+| Sufixo | Significado | Uso |
+|--------|-------------|-----|
+| `Service` | Serviço | Lógica de negócio ou integração com APIs externas. Ex: `AuthService`, `PaymentService` |
+| `Repository` | Repositório | Acesso e persistência de dados. Ex: `UserRepository`, `OrderRepository` |
+| `Controller` | Controlador | Ponto de entrada para requisições ou navegação. Ex: `AuthController` |
+| `Adapter` | Adaptador | Tradução entre interfaces ou formatos. Ex: `ApiAdapter`, `StorageAdapter` |
+| `Mapper` | Mapeador | Conversão entre modelos ou entidades. Ex: `UserMapper`, `ResponseMapper` |
+| `Middleware` | Intermediário | Processamento intermediário em pipelines. Ex: `AuthMiddleware`, `LogMiddleware` |
+| `Provider` | Provedor | Fornecimento de dependências ou estado. Ex: `ThemeProvider`, `AuthProvider` |
+| `Hook` | Hook | Lógica reutilizável com estado em frameworks reativos. Ex: `useAuth`, `useFetch` |
 
 ## 5.2 Commits — Conventional Commits
 
-Estrutura obrigatoria: `!type(?scope): !subject`
+Estrutura obrigatória: `!type(?scope): !subject`
 
-- **type:** o tipo da alteracao (ver tabela abaixo).
-- **scope:** o contexto da mudanca (opcional, entre parenteses).
-- **subject:** mensagem descritiva no imperativo. Teste: "Se aplicado, este commit ira... [subject]".
+- **type:** o tipo da alteração (ver tabela abaixo).
+- **scope:** o contexto da mudança (opcional, entre parênteses).
+- **subject:** mensagem descritiva no imperativo. Teste: "Se aplicado, este commit irá... [subject]".
 
 | Tipo | Quando usar |
 |------|-------------|
-| `feat` | Novo script ou funcionalidade para analise |
-| `fix` | Correcao de bug em script existente |
-| `docs` | Alteracoes apenas na documentacao |
-| `style` | Formatacao, espacos (sem mudar logica) |
-| `refactor` | Refatoracao de codigo (sem corrigir bugs ou criar features) |
-| `perf` | Melhoria de performance em processamento GEE |
-| `test` | Criacao ou ajuste de scripts de validacao |
-| `chore` | Alteracoes de organizacao ou configuracao |
+| `feat` | Nova funcionalidade para o usuário |
+| `fix` | Correção de bug |
+| `docs` | Alterações apenas na documentação |
+| `style` | Formatação, espaços, ponto e vírgula (sem mudar lógica) |
+| `refactor` | Refatoração de código (sem corrigir bugs ou criar features) |
+| `perf` | Melhoria de performance |
+| `test` | Criação ou ajuste de testes |
+| `chore` | Alterações de build, ferramentas ou configurações |
+| `build` | Dependências externas ou sistema de build |
+| `ci` | Configuração de CI |
+| `revert` | Reversão de um commit anterior |
 
-Exemplos: `feat(ndwi): adiciona calculo NDWI para Sentinel-2`, `fix(filter): corrige intervalo temporal no filtro de datas`.
+Exemplos: `feat(auth): add Google OAuth integration`, `fix(api): handle 500 error on user endpoint`.
 
-**Restricoes obrigatorias de commit:**
+**Restrições obrigatórias de commit:**
 
-- **Sem body/description:** O commit contem APENAS a linha de subject. Nunca adicione corpo, rodape, paragrafos explicativos ou qualquer texto alem da primeira linha.
-- **Sem Co-authored-by:** Nunca inclua trailers de co-autoria (`Co-authored-by`, `Signed-off-by`, etc.).
-- **Formato final do comando:** `git commit -m "type(scope): subject"` — nada alem disso.
+- **Sem body/description:** O commit contém APENAS a linha de subject. Nunca adicione corpo, rodapé, parágrafos explicativos ou qualquer texto além da primeira linha. Se a mudança não cabe em uma linha de subject clara, a mudança é grande demais — quebre em commits menores.
+- **Sem Co-authored-by:** Nunca inclua trailers de co-autoria (`Co-authored-by`, `Signed-off-by`, etc.). O responsável pelo commit é quem o executa. Código gerado por IA não tem autoria a ser creditada.
+- **Formato final do comando:** `git commit -m "type(scope): subject"` — nada além disso.
+
+**Dimensão pública do histórico:** Em repositórios públicos, o histórico de commits é leitura externa — vide regra 12 (Portfólio Público). Mensagens fora do padrão Conventional Commits comunicam amadorismo no portfólio independentemente da qualidade do código.
 
 ## 5.3 Branches — Nomenclatura
 
 Toda branch de trabalho segue o formato: `type/TASK-NNN-descricao-curta`
 
 - **type:** o mesmo tipo do Conventional Commits (feat, fix, refactor, etc.).
-- **TASK-NNN:** referencia direta a task registrada em `.ai/tasks.md`.
-- **descricao-curta:** 2 a 4 palavras separadas por hifen, descrevendo o escopo.
+- **TASK-NNN:** referência direta à task registrada em `tasks.md`.
+- **descricao-curta:** 2 a 4 palavras separadas por hífen, descrevendo o escopo.
 
-Exemplos: `feat/TASK-001-ndwi-sentinel2`, `fix/TASK-005-filtro-nuvens`, `refactor/TASK-010-funcoes-utils`.
+Exemplos: `feat/TASK-001-login-google`, `fix/TASK-012-erro-upload-foto`, `refactor/TASK-023-migrar-hive`.
 
-O agente deve sugerir o nome da branch ao iniciar uma task, seguindo esta convencao.
+O agente deve sugerir o nome da branch ao iniciar uma task, seguindo esta convenção. Se o projeto já possuir uma convenção de branches estabelecida, ela tem precedência.
