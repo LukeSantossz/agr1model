@@ -18,6 +18,7 @@
 
 | # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observações |
 |---|------|------|--------------|-----------------|-----------|-------------|
+| 2 | 2026-05-05 | TASK-002 | minor | 1 arquivo — README.md | aprovado | Checklist agêntico: aplicado |
 | 1 | 2026-05-05 | TASK-001 | major | 16 arquivos — .ai/rules/, .ai/ | aprovado | Checklist agêntico: aplicado |
 
 ## Estado da Codebase
@@ -26,8 +27,8 @@
 
 - **Última atualização:** 2026-05-05
 - **Último responsável:** Claude Code (Opus 4.5)
-- **Branch ativa:** refactor/TASK-001-sync-ai-rules
-- **Última task concluída:** TASK-001
+- **Branch ativa:** docs/TASK-002-readme-portfolio
+- **Última task concluída:** TASK-002
 
 ## Pendências Conhecidas
 

@@ -1,40 +1,92 @@
 # agr1model
 
-Estudo de indices NDWI (Normalized Difference Water Index) para modelagem computacional climatica.
+Water resource monitoring through NDWI (Normalized Difference Water Index) analysis using satellite imagery for climate modeling and agricultural planning.
 
-Este repositorio reune scripts JavaScript utilizados no [Google Earth Engine (GEE)](https://earthengine.google.com/) para testes e validacoes de tasks relacionadas a analise de recursos hidricos e variaveis climaticas.
+## Why This Exists
 
-## Estrutura do Projeto
+Agricultural regions face increasing uncertainty due to climate variability. Water availability directly impacts crop yields, irrigation planning, and drought preparedness. Traditional ground-based monitoring is expensive and limited in coverage.
+
+This project leverages Google Earth Engine's petabyte-scale satellite archive to analyze water body dynamics across agricultural regions. By computing NDWI from Sentinel-2 and Landsat imagery, it enables:
+
+- **Early drought detection** through temporal water index trends
+- **Irrigation planning** based on historical water availability patterns
+- **Climate impact assessment** for agricultural decision-making
+
+## Architecture
+
+```mermaid
+flowchart TB
+    subgraph GEE["Google Earth Engine"]
+        S2["Sentinel-2 Collection"]
+        LS["Landsat Collection"]
+        PROC["Image Processing"]
+        S2 --> PROC
+        LS --> PROC
+    end
+
+    subgraph Scripts["scripts/"]
+        NDWI["ndwi/"]
+        UTILS["utils/"]
+        NDWI --> |"imports"| UTILS
+    end
+
+    subgraph Output["Outputs"]
+        CHARTS["Time Series Charts"]
+        EXPORT["Exported Rasters"]
+        STATS["Statistics"]
+    end
+
+    PROC --> Scripts
+    Scripts --> Output
+
+    USER["User"] --> |"defines ROI & dates"| Scripts
+    Output --> |"informs"| USER
+```
+
+## Engineering Decisions
+
+| Decision | Rationale |
+|----------|-----------|
+| **Google Earth Engine** | Server-side processing eliminates local compute constraints; direct access to Sentinel-2/Landsat archives without download overhead |
+| **JavaScript (GEE API)** | Native language for GEE Code Editor; enables rapid prototyping and sharing via script links |
+| **NDWI over NDVI** | Water detection requires NIR/Green ratio (NDWI) rather than vegetation index; more sensitive to water body boundaries |
+| **Sentinel-2 primary, Landsat fallback** | Sentinel-2 offers 10m resolution vs Landsat's 30m; Landsat provides longer historical archive (1984+) for trend analysis |
+| **Modular utils/** | Reusable functions for filtering, masking, and exporting reduce code duplication across analysis scripts |
+
+## Getting Started
+
+### Prerequisites
+
+- Active [Google Earth Engine account](https://signup.earthengine.google.com/)
+
+### Running Scripts
+
+1. Open [Google Earth Engine Code Editor](https://code.earthengine.google.com/)
+2. Copy the desired script from `scripts/ndwi/`
+3. Paste into the editor
+4. Define your Region of Interest (ROI) and date range
+5. Click **Run**
+
+```javascript
+// Example: Define ROI and date range
+var roi = ee.Geometry.Rectangle([-50.5, -23.5, -49.5, -22.5]);
+var startDate = '2024-01-01';
+var endDate = '2024-12-31';
+```
+
+## Project Structure
 
 ```
 agr1model/
-├── .ai/                         # Configuracao centralizada para agentes de IA
-│   ├── rules/                   # Regras detalhadas de operacao (00..09)
-│   ├── registry.md              # Estado e historico do projeto
-│   └── tasks.md                 # Registro de tasks
 ├── scripts/
-│   ├── ndwi/                    # Scripts GEE para calculo e analise de NDWI
-│   └── utils/                   # Funcoes auxiliares e utilitarios reutilizaveis
-├── docs/                        # Documentacao, referencias e notas tecnicas
-├── data/                        # Dados de entrada, amostras e resultados exportados
-├── CLAUDE.md                    # Ponto de entrada — Claude Code
-├── .cursorrules                 # Ponto de entrada — Cursor
-├── .windsurfrules               # Ponto de entrada — Windsurf
-├── .github/copilot-instructions.md  # Ponto de entrada — GitHub Copilot
-├── LICENSE
+│   ├── ndwi/          # NDWI calculation and analysis scripts
+│   └── utils/         # Shared utility functions
+├── docs/              # Technical documentation and references
+├── data/              # Sample data and exported results
+├── .ai/               # AI agent configuration and rules
 └── README.md
 ```
 
-## Como Usar
+## License
 
-1. Acesse o [Google Earth Engine Code Editor](https://code.earthengine.google.com/).
-2. Copie o conteudo do script `.js` desejado da pasta `scripts/`.
-3. Cole no editor do GEE e execute.
-
-## Requisitos
-
-- Conta ativa no [Google Earth Engine](https://signup.earthengine.google.com/).
-
-## Licenca
-
-Este projeto esta licenciado sob os termos do arquivo [LICENSE](LICENSE).
+This project is licensed under the terms specified in [LICENSE](LICENSE).
