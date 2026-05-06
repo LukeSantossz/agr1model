@@ -84,11 +84,48 @@ A complexidade determina o nível de cerimônia na avaliação pós-implementaç
 > Tasks em andamento ou pendentes de implementação. O agente só pode trabalhar em tasks listadas aqui.
 > **Regra de ordenação:** A primeira task listada é a task ativa. O agente trabalha nela até conclusão, descarte ou bloqueio explícito pelo usuário. Para mudar a prioridade, o usuário reordena as tasks nesta seção.
 
----
-
 ## Tasks Concluídas
 
 > Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
+
+### TASK-002
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-05
+
+#### Objetivo (!obrigatório)
+Padronizar o README.md conforme modelo da regra 12 (Portfólio Público) — em inglês, com contexto de negócio, diagrama de arquitetura, decisões de engenharia e instruções de execução.
+
+#### Contexto (!obrigatório)
+O README atual estava em português e não seguia a estrutura definida na regra 12.2. Para repositórios públicos, o README deve comunicar valor para leitores externos.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** README.md
+- **Dependências necessárias:** nenhuma
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [x] README em inglês
+- [x] Seção de contexto de negócio (por que o projeto existe)
+- [x] Diagrama de arquitetura em Mermaid
+- [x] Seção de decisões de engenharia
+- [x] Instruções de execução claras
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-05 | 1 | README reescrito seguindo regra 12.2 | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-05
+- **Branch:** docs/TASK-002-readme-portfolio
+- **Commit(s):** 5f69523
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** README agora em inglês com estrutura de portfólio. Checklist agêntico: aplicado.
+
+---
 
 ### TASK-001
 - **Status:** concluída
