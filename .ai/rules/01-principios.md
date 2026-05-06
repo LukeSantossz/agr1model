@@ -1,69 +1,69 @@
-# 1. Principios Fundamentais
+# 1. Princípios Fundamentais
 
-Estas regras regem todo comportamento do agente, independentemente do modo de operacao ativo.
+Estas regras regem todo comportamento do agente, independentemente do modo de operação ativo.
 
 ## 1.1 Pense Antes de Codar
 
-Nao assuma. Nao esconda duvidas. Exponha trade-offs.
+Não assuma. Não esconda dúvidas. Exponha trade-offs.
 
 Antes de implementar qualquer coisa:
 
 - Declare suas premissas explicitamente. Se houver incerteza, pergunte.
-- Se existirem multiplas interpretacoes para a solicitacao, apresente-as — nao escolha silenciosamente.
-- Se uma abordagem mais simples existir, diga. Empurre de volta quando necessario.
-- Se algo estiver ambiguo, pare. Nomeie o que esta confuso. Pergunte.
+- Se existirem múltiplas interpretações para a solicitação, apresente-as — não escolha silenciosamente.
+- Se uma abordagem mais simples existir, diga. Empurre de volta quando necessário.
+- Se algo estiver ambíguo, pare. Nomeie o que está confuso. Pergunte.
 
 ## 1.2 Simplicidade Primeiro
 
-Codigo minimo que resolve o problema. Nada especulativo.
+Código mínimo que resolve o problema. Nada especulativo.
 
-- Nenhuma feature alem do que foi pedido.
-- Nenhuma abstracao para codigo de uso unico.
-- Nenhuma "flexibilidade" ou "configurabilidade" que nao foi solicitada.
-- Nenhum tratamento de erro para cenarios impossiveis.
-- Se voce escreveu 200 linhas e 50 resolveriam, reescreva.
+- Nenhuma feature além do que foi pedido.
+- Nenhuma abstração para código de uso único.
+- Nenhuma "flexibilidade" ou "configurabilidade" que não foi solicitada.
+- Nenhum tratamento de erro para cenários impossíveis.
+- Se você escreveu 200 linhas e 50 resolveriam, reescreva.
 
-Teste mental: "Um engenheiro senior diria que isso esta overengineered?" Se sim, simplifique.
+Teste mental: "Um engenheiro sênior diria que isso está overengineered?" Se sim, simplifique.
 
-## 1.3 Mudancas Cirurgicas
+## 1.3 Mudanças Cirúrgicas
 
-Toque apenas no que e necessario. Limpe apenas a sua propria sujeira.
+Toque apenas no que é necessário. Limpe apenas a sua própria sujeira.
 
-Ao editar codigo existente:
+Ao editar código existente:
 
-- Nao "melhore" codigo adjacente, comentarios ou formatacao.
-- Nao refatore o que nao esta quebrado.
-- Siga o estilo existente, mesmo que voce faria diferente.
-- Se notar codigo morto nao relacionado a task, mencione — nao delete.
+- Não "melhore" código adjacente, comentários ou formatação.
+- Não refatore o que não está quebrado.
+- Siga o estilo existente, mesmo que você faria diferente.
+- Se notar código morto não relacionado à task, mencione — não delete.
 
-Quando suas mudancas criarem orfaos (imports, variaveis, funcoes que ficaram sem uso por causa da sua alteracao), remova-os. Nao remova codigo morto pre-existente sem ser solicitado.
+Quando suas mudanças criarem órfãos (imports, variáveis, funções que ficaram sem uso por causa da sua alteração), remova-os. Não remova código morto pré-existente sem ser solicitado.
 
-Regra de validacao: toda linha alterada deve ter rastreabilidade direta a solicitacao do usuario.
+Regra de validação: toda linha alterada deve ter rastreabilidade direta à solicitação do usuário.
 
-## 1.4 Execucao Orientada a Objetivos
+## 1.4 Execução Orientada a Objetivos
 
-Defina criterios de sucesso. Itere ate verificar.
+Defina critérios de sucesso. Itere até verificar.
 
-Transforme tasks em objetivos verificaveis:
+Transforme tasks em objetivos verificáveis:
 
-- "Adicionar calculo NDWI" -> "Escrever script que calcula NDWI para a regiao e periodo definidos, validar output no GEE"
-- "Corrigir o filtro temporal" -> "Verificar que a colecao filtrada retorna imagens no intervalo esperado"
-- "Refatorar funcao de export" -> "Garantir que o export continua funcionando apos a mudanca"
+- "Adicionar validação" → "Escrever testes para inputs inválidos, depois fazê-los passar"
+- "Corrigir o bug" → "Escrever teste que reproduz, depois fazê-lo passar"
+- "Refatorar X" → "Garantir que testes passam antes e depois"
 
-Para tasks com multiplos passos, declare um plano breve antes de iniciar:
+Para tasks com múltiplos passos, declare um plano breve antes de iniciar:
 
 ```
-1. [Passo] -> verificar: [criterio]
-2. [Passo] -> verificar: [criterio]
-3. [Passo] -> verificar: [criterio]
+1. [Passo] → verificar: [critério]
+2. [Passo] → verificar: [critério]
+3. [Passo] → verificar: [critério]
 ```
 
-## 1.5 Validacao dos Principios
+## 1.5 Validação dos Princípios
 
-Estes principios estao funcionando quando:
+Estes princípios estão funcionando quando:
 
-- Diffs contem menos mudancas desnecessarias a cada sessao.
+- Diffs contêm menos mudanças desnecessárias a cada sessão.
 - Reescritas por overengineering diminuem ao longo do tempo.
-- Perguntas de esclarecimento acontecem antes da implementacao, nao depois de erros.
+- Perguntas de esclarecimento acontecem antes da implementação, não depois de erros.
 
-Registre essas observacoes na secao de Padroes Recorrentes do Registro de Projeto para acompanhar a evolucao.
+Registre essas observações na seção de Padrões Recorrentes do Registro de Projeto para acompanhar a evolução.

@@ -1,28 +1,27 @@
-# 2. Reconhecimento Obrigatorio da Codebase (Pre-Implementacao)
+# 2. Reconhecimento Obrigatório da Codebase (Pré-Implementação)
 
-Analise de viabilidade executada antes de qualquer implementacao. O objetivo e mapear o terreno e detectar incompatibilidades antes de escrever codigo — nao auditar o que foi escrito (isso e responsabilidade da avaliacao pos-implementacao). Esta etapa deve ser leve e rapida: levantamento de fatos, nao analise profunda.
+Análise de viabilidade executada antes de qualquer implementação. O objetivo é mapear o terreno e detectar incompatibilidades antes de escrever código — não auditar o que foi escrito (isso é responsabilidade da avaliação pós-implementação). Esta etapa deve ser leve e rápida: levantamento de fatos, não análise profunda.
 
-Nao avance para implementacao sem conclui-la.
+Não avance para implementação sem concluí-la.
 
-## 2.1 Inventario Tecnico
+## 2.1 Inventário Técnico
 
 Identifique e registre internamente:
 
-- Linguagem e plataforma em uso (JavaScript / Google Earth Engine).
-- Estrutura de diretorios e organizacao dos scripts.
-- Convencoes de codigo existentes: nomenclatura de variaveis, organizacao de funcoes, estilo.
-- Colecoes de imagens e datasets GEE utilizados (Sentinel-2, Landsat, etc.).
-- Bandas espectrais relevantes para os calculos (Green, NIR, SWIR).
-- Regioes de interesse (geometries) definidas nos scripts.
-- Periodos temporais e filtros aplicados.
+- Linguagem(ns) e framework(s) em uso.
+- Estrutura de diretórios e padrão arquitetural adotado.
+- Convenções de código existentes: nomenclatura, organização de módulos, padrões de importação, estilo.
+- Estado atual dos testes (existem? qual framework? qual cobertura?).
+- Dependências do projeto e suas versões (package.json, pubspec.yaml, requirements.txt, etc.).
+- Débitos técnicos visíveis, inconsistências e código morto.
 
-## 2.2 Validacao de Compatibilidade (Viabilidade)
+## 2.2 Validação de Compatibilidade (Viabilidade)
 
-Verifique rapidamente se a implementacao pretendida e compativel com o projeto existente:
+Verifique rapidamente se a implementação pretendida é compatível com o projeto existente:
 
-- O script proposto segue a organizacao existente dos demais scripts?
-- Os datasets e colecoes GEE necessarios sao acessiveis e validos?
-- A estrutura de funcoes e export e coerente com os scripts existentes?
-- Ha funcionalidade equivalente ja existente na codebase?
+- O código proposto segue a arquitetura existente ou introduziria padrões divergentes?
+- As dependências necessárias já existem no projeto ou precisariam ser adicionadas?
+- A estrutura de arquivos proposta é coerente com a organização atual?
+- Há funcionalidade equivalente já existente na codebase?
 
-Se qualquer resposta indicar divergencia, sinalize ao usuario antes de prosseguir. Nao analise qualidade de codigo nesta etapa — isso ocorre na avaliacao pos-implementacao.
+Se qualquer resposta indicar divergência, sinalize ao usuário antes de prosseguir. Não analise qualidade de código nesta etapa — isso ocorre na avaliação pós-implementação.
