@@ -120,7 +120,7 @@ Auditoria de conformidade identificou: (1) tasks concluídas na seção errada, 
 #### Resultado (preenchido ao concluir)
 - **Data de conclusão:** 2026-05-06
 - **Branch:** feat/TASK-005-009-ndwi-analysis
-- **Commit(s):** pendente (alteracoes em .ai/ apenas)
+- **Commit(s):** 6146817
 - **Avaliação pós-implementação:** aprovado
 - **Observações:** Tasks reorganizadas, commits vinculados, TASK-000 implementada
 
@@ -165,7 +165,7 @@ A regra 09-enforcement.md define hooks obrigatórios (commit-msg, pre-commit, pr
 #### Resultado (preenchido ao concluir)
 - **Data de conclusão:** 2026-05-06
 - **Branch:** feat/TASK-005-009-ndwi-analysis
-- **Commit(s):** pendente (alteracoes em .ai/ apenas)
+- **Commit(s):** 106d2ce
 - **Avaliação pós-implementação:** aprovado
 - **Observações:** 4 hooks bash implementados, enforcement.conf criado, core.hooksPath configurado
 
