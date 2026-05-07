@@ -17,7 +17,7 @@
 // ============================================================================
 
 // Importa as funcoes utilitarias
-var utils = require('users/luquinhas_gonzales/agr1model:scripts/utils/sentinel2_utils');
+var utils = require('users/luquinhas_gonzales/agrimodel:scripts/utils/sentinel2_utils');
 
 // ============================================================================
 // CONFIGURACOES
@@ -47,7 +47,8 @@ var CRS = 'EPSG:4326';
 
 // Carrega limites de SP
 var limiteSP = utils.carregarLimiteSP();
-var geometriaSP = limiteSP.geometry();
+// Simplifica a geometria para reduzir consumo de memoria (tolerancia de 1000m)
+var geometriaSP = limiteSP.geometry().simplify({maxError: 1000});
 
 // Carrega municipios de SP para analise regional
 var municipiosSP = utils.carregarMunicipiosSP();
@@ -303,20 +304,28 @@ var visNDWI = utils.visParamsNDWI();
 // Adiciona camadas base
 Map.addLayer(limiteSP, {color: 'black'}, 'Limite SP', true, 0.3);
 
+// Reproject para reduzir consumo de memoria (escala 100m)
+var ndwiMediaGeralVis = ndwiMediaGeral.reproject({crs: 'EPSG:4326', scale: 100});
+var hotspotsVis = hotspots.reproject({crs: 'EPSG:4326', scale: 100});
+var areaSecasVis = areaSecas.reproject({crs: 'EPSG:4326', scale: 100});
+var ganhoAguaVis = ganhoAgua.reproject({crs: 'EPSG:4326', scale: 100});
+var perdaAguaVis = perdaAgua.reproject({crs: 'EPSG:4326', scale: 100});
+var variacaoVis = variacao.reproject({crs: 'EPSG:4326', scale: 100});
+
 // NDWI medio com paleta
-Map.addLayer(ndwiMediaGeral, visNDWI, 'NDWI Medio (2017-2025)', false);
+Map.addLayer(ndwiMediaGeralVis, visNDWI, 'NDWI Medio (2017-2025)', false);
 
 // Hotspots de agua (top 10%)
-Map.addLayer(hotspots.selfMask(), {palette: ['#0571b0']}, 'Hotspots de Agua (Top 10%)', true);
+Map.addLayer(hotspotsVis.selfMask(), {palette: ['#0571b0']}, 'Hotspots de Agua (Top 10%)', true);
 
 // Areas secas (bottom 10%)
-Map.addLayer(areaSecas.selfMask(), {palette: ['#ca0020']}, 'Areas Mais Secas (Bottom 10%)', false);
+Map.addLayer(areaSecasVis.selfMask(), {palette: ['#ca0020']}, 'Areas Mais Secas (Bottom 10%)', false);
 
 // Ganho significativo de agua
-Map.addLayer(ganhoAgua.selfMask(), {palette: ['#1a9850']}, 'Ganho Significativo de Agua', false);
+Map.addLayer(ganhoAguaVis.selfMask(), {palette: ['#1a9850']}, 'Ganho Significativo de Agua', false);
 
 // Perda significativa de agua
-Map.addLayer(perdaAgua.selfMask(), {palette: ['#d73027']}, 'Perda Significativa de Agua', false);
+Map.addLayer(perdaAguaVis.selfMask(), {palette: ['#d73027']}, 'Perda Significativa de Agua', false);
 
 // Variacao com paleta divergente
 var visVariacao = {
@@ -325,14 +334,14 @@ var visVariacao = {
   palette: ['#d73027', '#f46d43', '#fdae61', '#fee090', '#ffffbf',
             '#e0f3f8', '#abd9e9', '#74add1', '#4575b4']
 };
-Map.addLayer(variacao, visVariacao, 'Variacao NDWI', false);
+Map.addLayer(variacaoVis, visVariacao, 'Variacao NDWI', false);
 
 // Municipios coloridos por NDWI medio
 // Cria imagem a partir dos municipios
 var municipiosNDWI = municipiosAnalisados.reduceToImage({
   properties: ['ndwi_media'],
   reducer: ee.Reducer.first()
-});
+}).reproject({crs: 'EPSG:4326', scale: 100});
 
 Map.addLayer(municipiosNDWI.clip(geometriaSP), visNDWI, 'NDWI por Municipio', false);
 
@@ -340,7 +349,7 @@ Map.addLayer(municipiosNDWI.clip(geometriaSP), visNDWI, 'NDWI por Municipio', fa
 var municipiosVariacao = municipiosAnalisados.reduceToImage({
   properties: ['variacao_media'],
   reducer: ee.Reducer.first()
-});
+}).reproject({crs: 'EPSG:4326', scale: 100});
 
 Map.addLayer(municipiosVariacao.clip(geometriaSP), visVariacao, 'Variacao por Municipio', false);
 

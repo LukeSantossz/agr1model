@@ -14,7 +14,7 @@
 // ============================================================================
 
 // Asset ID base do projeto no GEE
-var ASSET_BASE = 'users/luquinhas_gonzales/agr1model/';
+var ASSET_BASE = 'users/luquinhas_gonzales/';
 
 // Colecao Sentinel-2 Surface Reflectance Harmonizada
 // Disponivel a partir de 2017-03-28

@@ -15,7 +15,7 @@
 // ============================================================================
 
 // Importa as funcoes utilitarias
-var utils = require('users/luquinhas_gonzales/agr1model:scripts/utils/sentinel2_utils');
+var utils = require('users/luquinhas_gonzales/agrimodel:scripts/utils/sentinel2_utils');
 
 // ============================================================================
 // CONFIGURACOES
@@ -44,7 +44,8 @@ var CRS = 'EPSG:4326';
 var limiteSP = utils.carregarLimiteSP();
 
 // Extrai a geometria para uso nos filtros e recortes
-var geometriaSP = limiteSP.geometry();
+// Simplifica a geometria para reduzir consumo de memoria (tolerancia de 1000m)
+var geometriaSP = limiteSP.geometry().simplify({maxError: 1000});
 
 // Imprime informacoes iniciais
 print('=== MEDIA ANUAL NDWI - SAO PAULO ===');
@@ -78,16 +79,13 @@ var calcularMediaAnual = function(ano) {
   var colecaoAno = utils.obterColecaoS2(dataInicio, dataFim, geometriaSP, MAX_NUVENS);
 
   // Aplica o processamento em cada imagem (mascara de nuvens + NDWI)
+  // NOTA: Nao fazemos clip() em cada imagem para economizar memoria
   var ndwiAno = colecaoAno.map(utils.processarImagemNDWI);
-
-  // Recorta para o limite de SP
-  var ndwiAnoSP = ndwiAno.map(function(image) {
-    return image.clip(geometriaSP);
-  });
 
   // Calcula a media de todas as imagens do ano
   // mean() calcula a media pixel a pixel
-  var mediaAnual = ndwiAnoSP.mean();
+  // O clip e feito apenas no resultado final para economizar memoria
+  var mediaAnual = ndwiAno.mean().clip(geometriaSP);
 
   // Adiciona metadados importantes a imagem resultante
   // NOTA: Nao usar getInfo() dentro de funcoes mapeadas (server-side)
@@ -95,7 +93,7 @@ var calcularMediaAnual = function(ano) {
   mediaAnual = mediaAnual
     .set('ano', ano)                                    // Ano da composicao
     .set('system:time_start', dataInicio.millis())     // Timestamp de inicio
-    .set('num_imagens', ndwiAnoSP.size())              // Quantidade de imagens usadas
+    .set('num_imagens', ndwiAno.size())                // Quantidade de imagens usadas
     .rename('NDWI');                                    // Nome padronizado da banda
 
   return mediaAnual;
@@ -207,18 +205,19 @@ Map.addLayer(limiteSP, {color: 'black'}, 'Limite SP', true, 0.5);
 // Parametros de visualizacao para NDWI
 var visParams = utils.visParamsNDWI();
 
-// Adiciona a media de cada ano como camada no mapa
-// Apenas alguns anos sao adicionados para nao poluir o mapa
-var anosVisualizacao = [2017, 2019, 2021, 2023, 2025];
+// Adiciona apenas 2 anos para economizar memoria
+// Para visualizar mais anos, use a exportacao
+var anosVisualizacao = [2020, 2024];
 
 anosVisualizacao.forEach(function(ano) {
   // Filtra a imagem do ano
   var imagemAno = colecaoMediasAnuais
     .filter(ee.Filter.eq('ano', ano))
-    .first();
+    .first()
+    .reproject({crs: 'EPSG:4326', scale: 100});  // Reduz memoria
 
-  // Adiciona ao mapa (camadas de anos antigos iniciam desligadas)
-  var visivel = (ano === 2025);  // Apenas 2025 visivel por padrao
+  // Adiciona ao mapa (apenas o mais recente visivel)
+  var visivel = (ano === 2024);
   Map.addLayer(imagemAno, visParams, 'NDWI Media ' + ano, visivel);
 });
 

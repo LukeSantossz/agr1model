@@ -18,7 +18,7 @@
 // ============================================================================
 
 // Importa as funcoes utilitarias
-var utils = require('users/luquinhas_gonzales/agr1model:scripts/utils/sentinel2_utils');
+var utils = require('users/luquinhas_gonzales/agrimodel:scripts/utils/sentinel2_utils');
 
 // ============================================================================
 // CONFIGURACOES
@@ -46,7 +46,8 @@ var CRS = 'EPSG:4326';
 
 // Carrega o limite do estado de Sao Paulo
 var limiteSP = utils.carregarLimiteSP();
-var geometriaSP = limiteSP.geometry();
+// Simplifica a geometria para reduzir consumo de memoria (tolerancia de 1000m)
+var geometriaSP = limiteSP.geometry().simplify({maxError: 1000});
 
 // Imprime informacoes iniciais
 print('=== VARIACAO TEMPORAL NDWI ===');
@@ -64,7 +65,7 @@ print('Limiar de mudanca:', LIMIAR_INCREMENTO);
  * @param {Number} ano - Ano para calcular
  * @return {ee.Image} - Imagem com media do NDWI
  */
-var calcularMediaAnual = function(ano) {
+var calcularMediaAnual = function (ano) {
   // Define datas de inicio e fim
   // Para 2017, comeca em marco (quando Sentinel-2 SR Harmonized iniciou)
   var mesInicio = (ano === 2017) ? 3 : 1;
@@ -76,7 +77,7 @@ var calcularMediaAnual = function(ano) {
   // Obtem e processa a colecao
   var colecao = utils.obterColecaoS2(dataInicio, dataFim, geometriaSP, MAX_NUVENS)
     .map(utils.processarImagemNDWI)
-    .map(function(img) { return img.clip(geometriaSP); });
+    .map(function (img) { return img.clip(geometriaSP); });
 
   // Calcula a media e adiciona metadados
   return colecao.mean()
@@ -245,16 +246,16 @@ var histograma = ui.Chart.image.histogram({
   maxBuckets: 50,                 // Numero de intervalos no histograma
   maxPixels: 1e9
 })
-.setOptions({
-  title: 'Distribuicao da Variacao de NDWI (2017-2025)',
-  hAxis: {
-    title: 'Variacao NDWI (2025 - 2017)',
-    viewWindow: {min: -0.5, max: 0.5}
-  },
-  vAxis: {title: 'Frequencia (pixels)'},
-  colors: ['#2166ac'],
-  legend: {position: 'none'}
-});
+  .setOptions({
+    title: 'Distribuicao da Variacao de NDWI (2017-2025)',
+    hAxis: {
+      title: 'Variacao NDWI (2025 - 2017)',
+      viewWindow: { min: -0.5, max: 0.5 }
+    },
+    vAxis: { title: 'Frequencia (pixels)' },
+    colors: ['#2166ac'],
+    legend: { position: 'none' }
+  });
 
 print(histograma);
 
@@ -268,16 +269,20 @@ print('=== VISUALIZACAO NO MAPA ===');
 Map.centerObject(geometriaSP, 7);
 
 // Adiciona limite do estado
-Map.addLayer(limiteSP, {color: 'black'}, 'Limite SP', true, 0.5);
+Map.addLayer(limiteSP, { color: 'black' }, 'Limite SP', true, 0.5);
 
 // Parametros de visualizacao para o NDWI
 var visNDWI = utils.visParamsNDWI();
 
+// Reproject para reduzir consumo de memoria
+var ndwi2017Vis = ndwi2017.reproject({ crs: 'EPSG:4326', scale: 100 });
+var ndwi2025Vis = ndwi2025.reproject({ crs: 'EPSG:4326', scale: 100 });
+
 // Adiciona NDWI de 2017
-Map.addLayer(ndwi2017, visNDWI, 'NDWI 2017', false);
+Map.addLayer(ndwi2017Vis, visNDWI, 'NDWI 2017', false);
 
 // Adiciona NDWI de 2025
-Map.addLayer(ndwi2025, visNDWI, 'NDWI 2025', false);
+Map.addLayer(ndwi2025Vis, visNDWI, 'NDWI 2025', false);
 
 // Parametros de visualizacao para variacao (escala divergente)
 // Azul = aumento de agua, Vermelho = reducao de agua
@@ -297,8 +302,9 @@ var visVariacao = {
   ]
 };
 
-// Adiciona mapa de variacao
-Map.addLayer(variacao, visVariacao, 'Variacao NDWI (2025-2017)', true);
+// Adiciona mapa de variacao (com reproject para reduzir memoria)
+var variacaoVis = variacao.reproject({ crs: 'EPSG:4326', scale: 100 });
+Map.addLayer(variacaoVis, visVariacao, 'Variacao NDWI (2025-2017)', true);
 
 // Parametros para mapa de classificacao
 var visClassificacao = {
@@ -311,8 +317,9 @@ var visClassificacao = {
   ]
 };
 
-// Adiciona mapa de classificacao
-Map.addLayer(classificacao, visClassificacao, 'Classificacao de Mudanca', false);
+// Adiciona mapa de classificacao (com reproject para reduzir memoria)
+var classificacaoVis = classificacao.reproject({ crs: 'EPSG:4326', scale: 100 });
+Map.addLayer(classificacaoVis, visClassificacao, 'Classificacao de Mudanca', false);
 
 // ============================================================================
 // LEGENDA
