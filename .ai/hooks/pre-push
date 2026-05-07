@@ -1,0 +1,54 @@
+#!/bin/bash
+# Hook: pre-push
+# Validates branch naming and task status
+# Rule: 09-enforcement.md section 9.1
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# Skip validation for main/master branches
+if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then
+    exit 0
+fi
+
+# Valid branch types
+TYPES="feat|fix|docs|style|refactor|perf|test|chore|build|ci|revert"
+
+# Pattern: type/TASK-NNN-description
+PATTERN="^($TYPES)/TASK-[0-9]+-[a-z0-9-]+$"
+
+# Check branch name format
+if ! echo "$BRANCH" | grep -Eq "$PATTERN"; then
+    echo "WARNING: Branch name does not follow convention."
+    echo ""
+    echo "Expected format: type/TASK-NNN-description"
+    echo "  - type: $TYPES"
+    echo "  - TASK-NNN: task number from tasks.md"
+    echo "  - description: 2-4 words separated by hyphens"
+    echo ""
+    echo "Examples:"
+    echo "  feat/TASK-001-login-google"
+    echo "  fix/TASK-012-erro-upload-foto"
+    echo ""
+    echo "Your branch: $BRANCH"
+    echo ""
+    echo "This is a warning. Push will proceed."
+fi
+
+# Check if tasks.md exists and has matching task
+TASKS_FILE=".ai/tasks.md"
+if [ -f "$TASKS_FILE" ]; then
+    # Extract TASK-NNN from branch name
+    TASK_NUM=$(echo "$BRANCH" | grep -oE "TASK-[0-9]+" || true)
+
+    if [ -n "$TASK_NUM" ]; then
+        # Check if task exists in Tasks Ativas with status "em andamento"
+        if ! grep -A5 "### $TASK_NUM" "$TASKS_FILE" | grep -q "em andamento"; then
+            echo "WARNING: $TASK_NUM not found as 'em andamento' in tasks.md"
+            echo "Make sure the task is registered and has the correct status."
+            echo ""
+            echo "This is a warning. Push will proceed."
+        fi
+    fi
+fi
+
+exit 0
