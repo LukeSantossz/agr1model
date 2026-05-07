@@ -305,12 +305,12 @@ var visNDWI = utils.visParamsNDWI();
 Map.addLayer(limiteSP, {color: 'black'}, 'Limite SP', true, 0.3);
 
 // Reproject para reduzir consumo de memoria (escala 100m)
-var ndwiMediaGeralVis = ndwiMediaGeral.reproject({crs: 'EPSG:4326', scale: 100});
-var hotspotsVis = hotspots.reproject({crs: 'EPSG:4326', scale: 100});
-var areaSecasVis = areaSecas.reproject({crs: 'EPSG:4326', scale: 100});
-var ganhoAguaVis = ganhoAgua.reproject({crs: 'EPSG:4326', scale: 100});
-var perdaAguaVis = perdaAgua.reproject({crs: 'EPSG:4326', scale: 100});
-var variacaoVis = variacao.reproject({crs: 'EPSG:4326', scale: 100});
+var ndwiMediaGeralVis = ndwiMediaGeral.reproject({crs: 'EPSG:4326', scale: 500});
+var hotspotsVis = hotspots.reproject({crs: 'EPSG:4326', scale: 500});
+var areaSecasVis = areaSecas.reproject({crs: 'EPSG:4326', scale: 500});
+var ganhoAguaVis = ganhoAgua.reproject({crs: 'EPSG:4326', scale: 500});
+var perdaAguaVis = perdaAgua.reproject({crs: 'EPSG:4326', scale: 500});
+var variacaoVis = variacao.reproject({crs: 'EPSG:4326', scale: 500});
 
 // NDWI medio com paleta
 Map.addLayer(ndwiMediaGeralVis, visNDWI, 'NDWI Medio (2017-2025)', false);
@@ -341,7 +341,7 @@ Map.addLayer(variacaoVis, visVariacao, 'Variacao NDWI', false);
 var municipiosNDWI = municipiosAnalisados.reduceToImage({
   properties: ['ndwi_media'],
   reducer: ee.Reducer.first()
-}).reproject({crs: 'EPSG:4326', scale: 100});
+}).reproject({crs: 'EPSG:4326', scale: 500});
 
 Map.addLayer(municipiosNDWI.clip(geometriaSP), visNDWI, 'NDWI por Municipio', false);
 
@@ -349,7 +349,7 @@ Map.addLayer(municipiosNDWI.clip(geometriaSP), visNDWI, 'NDWI por Municipio', fa
 var municipiosVariacao = municipiosAnalisados.reduceToImage({
   properties: ['variacao_media'],
   reducer: ee.Reducer.first()
-}).reproject({crs: 'EPSG:4326', scale: 100});
+}).reproject({crs: 'EPSG:4326', scale: 500});
 
 Map.addLayer(municipiosVariacao.clip(geometriaSP), visVariacao, 'Variacao por Municipio', false);
 

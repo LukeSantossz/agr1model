@@ -18,6 +18,7 @@
 
 | # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observações |
 |---|------|------|--------------|-----------------|-----------|-------------|
+| 10 | 2026-05-06 | TASK-010 | minor | 6 arquivos — scripts/, shape_files/, README.md | aprovado | GEE paths fix, memory optimization |
 | 9 | 2026-05-05 | TASK-009 | minor | 1 arquivo — scripts/ndwi/04_hotspots_analise.js | aprovado | Ranking municipios, hotspots P90 |
 | 8 | 2026-05-05 | TASK-008 | minor | 1 arquivo — scripts/ndwi/03_variacao_temporal.js | aprovado | Variacao 2015-2025, histograma |
 | 7 | 2026-05-05 | TASK-007 | minor | 1 arquivo — scripts/ndwi/02_media_anual.js | aprovado | Serie temporal, graficos |
@@ -32,10 +33,10 @@
 
 > Atualizado a cada implementação ou verificação pós-pull. Reflete o snapshot mais recente do projeto.
 
-- **Última atualização:** 2026-05-05
+- **Última atualização:** 2026-05-06
 - **Último responsável:** Claude Code (Opus 4.5)
-- **Branch ativa:** main
-- **Última task concluída:** TASK-009
+- **Branch ativa:** feat/TASK-005-009-ndwi-analysis
+- **Última task concluída:** TASK-010
 
 ## Pendências Conhecidas
 
@@ -46,6 +47,8 @@
 > Decisões tomadas durante implementações que afetam futuras tasks. Inclua justificativa breve.
 
 - **Sincronização .ai/rules/ com .claude_config/rules/:** As regras em `.ai/rules/` agora refletem a metodologia genérica (não específica GEE) de `.claude_config/rules/`. Inclui novas regras 10-12 (Engenharia Agêntica, Codex, Portfólio). Commits em inglês seguindo Conventional Commits.
+
+- **Otimização de memória GEE:** Para evitar erro "User memory limit exceeded", os scripts usam: (1) geometria simplificada com maxError 1000m, (2) escala de 500m para visualização no mapa, (3) limite de 50 imagens por ano, (4) clip apenas no resultado final. Exportações mantêm resolução de 100m.
 
 ## Padrões Recorrentes Observados
 

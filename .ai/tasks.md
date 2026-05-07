@@ -84,6 +84,47 @@ A complexidade determina o nível de cerimônia na avaliação pós-implementaç
 > Tasks em andamento ou pendentes de implementação. O agente só pode trabalhar em tasks listadas aqui.
 > **Regra de ordenação:** A primeira task listada é a task ativa. O agente trabalha nela até conclusão, descarte ou bloqueio explícito pelo usuário. Para mudar a prioridade, o usuário reordena as tasks nesta seção.
 
+### TASK-010
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-06
+
+#### Objetivo (!obrigatório)
+Corrigir paths para GEE Code Editor e otimizar scripts para evitar erro de memoria.
+
+#### Contexto (!obrigatório)
+Scripts originais usavam path `agr1model` mas repositorio GEE usa `agrimodel`. Alem disso, o processamento de SP inteiro causava erro "User memory limit exceeded" no GEE.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** scripts/ndwi/*.js, scripts/utils/sentinel2_utils.js, shape_files/, README.md
+- **Dependências necessárias:** nenhuma
+- **Impacto em funcionalidades existentes:** scripts agora compativeis com GEE Code Editor
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Paths ajustados de agr1model para agrimodel
+- [x] ASSET_BASE ajustado para users/luquinhas_gonzales/
+- [x] Geometria simplificada com maxError 1000m
+- [x] Escala de visualizacao aumentada para 500m
+- [x] Limite de imagens para processamento (50 por ano)
+- [x] Shapefiles adicionados ao repositorio
+- [x] Badges de stack no README
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-06 | 1 | Ajustados paths, otimizacoes memoria, shapefiles | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-06
+- **Branch:** feat/TASK-005-009-ndwi-analysis
+- **Commit(s):** f4fa801, e2a3f46, 51603cd
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Escala 500m para visualizacao, 100m para exportacao
+
+---
+
 ### TASK-005
 - **Status:** concluída
 - **Modo:** desenvolvimento

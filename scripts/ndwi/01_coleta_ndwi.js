@@ -136,22 +136,27 @@ Map.addLayer(limiteSP, {color: 'black'}, 'Limite SP', true, 0.5);
 
 // OTIMIZACAO: Processa apenas 2024 para visualizacao (evita erro de memoria)
 // Para analise completa, use os scripts de exportacao
-var colecao2024 = colecaoNDWI_SP.filterDate('2024-01-01', '2024-12-31');
+// Limita a 50 imagens para reduzir consumo de memoria
+var colecao2024 = colecaoNDWI_SP
+  .filterDate('2024-01-01', '2024-12-31')
+  .limit(50);
 
 // Calcula a mediana de 2024 para visualizacao
-// Usa clip e reproject para reduzir consumo de memoria
+// Escala de 500m para visualizacao (reduz memoria significativamente)
 var ndwi2024 = colecao2024.median()
   .clip(geometriaSP)
-  .reproject({crs: 'EPSG:4326', scale: 100});
+  .reproject({crs: 'EPSG:4326', scale: 500});
 
 // Adiciona a imagem ao mapa com paleta de cores
 Map.addLayer(ndwi2024, utils.visParamsNDWI(), 'NDWI 2024 (mediana)');
 
-// Para comparacao, processa 2020
-var colecao2020 = colecaoNDWI_SP.filterDate('2020-01-01', '2020-12-31');
+// Para comparacao, processa 2020 (limitado a 50 imagens)
+var colecao2020 = colecaoNDWI_SP
+  .filterDate('2020-01-01', '2020-12-31')
+  .limit(50);
 var ndwi2020 = colecao2020.median()
   .clip(geometriaSP)
-  .reproject({crs: 'EPSG:4326', scale: 100});
+  .reproject({crs: 'EPSG:4326', scale: 500});
 
 Map.addLayer(ndwi2020, utils.visParamsNDWI(), 'NDWI 2020 (mediana)', false);
 

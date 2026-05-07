@@ -275,8 +275,8 @@ Map.addLayer(limiteSP, { color: 'black' }, 'Limite SP', true, 0.5);
 var visNDWI = utils.visParamsNDWI();
 
 // Reproject para reduzir consumo de memoria
-var ndwi2017Vis = ndwi2017.reproject({ crs: 'EPSG:4326', scale: 100 });
-var ndwi2025Vis = ndwi2025.reproject({ crs: 'EPSG:4326', scale: 100 });
+var ndwi2017Vis = ndwi2017.reproject({ crs: 'EPSG:4326', scale: 500 });
+var ndwi2025Vis = ndwi2025.reproject({ crs: 'EPSG:4326', scale: 500 });
 
 // Adiciona NDWI de 2017
 Map.addLayer(ndwi2017Vis, visNDWI, 'NDWI 2017', false);
@@ -303,7 +303,7 @@ var visVariacao = {
 };
 
 // Adiciona mapa de variacao (com reproject para reduzir memoria)
-var variacaoVis = variacao.reproject({ crs: 'EPSG:4326', scale: 100 });
+var variacaoVis = variacao.reproject({ crs: 'EPSG:4326', scale: 500 });
 Map.addLayer(variacaoVis, visVariacao, 'Variacao NDWI (2025-2017)', true);
 
 // Parametros para mapa de classificacao
@@ -318,7 +318,7 @@ var visClassificacao = {
 };
 
 // Adiciona mapa de classificacao (com reproject para reduzir memoria)
-var classificacaoVis = classificacao.reproject({ crs: 'EPSG:4326', scale: 100 });
+var classificacaoVis = classificacao.reproject({ crs: 'EPSG:4326', scale: 500 });
 Map.addLayer(classificacaoVis, visClassificacao, 'Classificacao de Mudanca', false);
 
 // ============================================================================

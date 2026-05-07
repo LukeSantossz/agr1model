@@ -214,7 +214,7 @@ anosVisualizacao.forEach(function(ano) {
   var imagemAno = colecaoMediasAnuais
     .filter(ee.Filter.eq('ano', ano))
     .first()
-    .reproject({crs: 'EPSG:4326', scale: 100});  // Reduz memoria
+    .reproject({crs: 'EPSG:4326', scale: 500});  // Reduz memoria
 
   // Adiciona ao mapa (apenas o mais recente visivel)
   var visivel = (ano === 2024);
