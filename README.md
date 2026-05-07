@@ -1,5 +1,9 @@
 # agr1model
 
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Google Earth Engine](https://img.shields.io/badge/Google%20Earth%20Engine-4285F4?style=flat-square&logo=google-earth&logoColor=white)
+![Sentinel-2](https://img.shields.io/badge/Sentinel--2-10m%20resolution-1B4F72?style=flat-square)
+
 Water resource monitoring through NDWI (Normalized Difference Water Index) analysis using satellite imagery for climate modeling and agricultural planning.
 
 ## Why This Exists

@@ -88,6 +88,330 @@ A complexidade determina o nível de cerimônia na avaliação pós-implementaç
 
 > Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
 
+### TASK-011
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-06
+
+#### Objetivo (!obrigatório)
+Corrigir não-conformidades organizacionais identificadas na auditoria de conformidade.
+
+#### Contexto (!obrigatório)
+Auditoria de conformidade identificou: (1) tasks concluídas na seção errada, (2) commits não vinculados nas tasks 005-009, (3) TASK-000 inexistente, (4) git hooks não instalados. Esta task corrige os itens organizacionais; TASK-000 trata dos hooks.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** .ai/tasks.md, .ai/registry.md
+- **Dependências necessárias:** nenhuma
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [x] TASK-005 a TASK-010 movidas para seção "Tasks Concluídas"
+- [x] Commits atualizados nas tasks 005-009 com hashes reais
+- [x] TASK-000 criada para implementação de hooks
+- [x] Registry atualizado com entrada TASK-011
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-06 | 1 | Correcoes organizacionais, movimentacao de tasks | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-06
+- **Branch:** feat/TASK-005-009-ndwi-analysis
+- **Commit(s):** 6146817
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Tasks reorganizadas, commits vinculados, TASK-000 implementada
+
+---
+
+### TASK-000
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** major
+- **Data de criação:** 2026-05-06
+
+#### Objetivo (!obrigatório)
+Implementar git hooks de enforcement automatizado conforme regra 09.
+
+#### Contexto (!obrigatório)
+A regra 09-enforcement.md define hooks obrigatórios (commit-msg, pre-commit, pre-push, post-merge) para validação automática do fluxo. Esta task deveria ser a primeira do projeto mas foi identificada como ausente na auditoria.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** .ai/hooks/commit-msg, .ai/hooks/pre-commit, .ai/hooks/pre-push, .ai/hooks/post-merge, .ai/enforcement.conf
+- **Dependências necessárias:** nenhuma
+- **Impacto em funcionalidades existentes:** valida commits, branches e escopo automaticamente
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Diretório .ai/hooks/ criado
+- [x] Hook commit-msg valida formato Conventional Commits
+- [x] Hook pre-commit detecta console.log/print/debugger
+- [x] Hook pre-push valida nome de branch e task ativa
+- [x] Hook post-merge sinaliza necessidade de verificação pós-pull
+- [x] git config core.hooksPath configurado para .ai/hooks
+- [x] enforcement.conf criado com patterns por linguagem
+
+#### Restrições (opcional)
+- Hooks em bash puro, stack-agnóstico
+- Não-bloqueante em caso de dúvida (warning em vez de erro)
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-06 | 1 | Hooks criados e configurados | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-06
+- **Branch:** feat/TASK-005-009-ndwi-analysis
+- **Commit(s):** 106d2ce
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** 4 hooks bash implementados, enforcement.conf criado, core.hooksPath configurado
+
+---
+
+### TASK-010
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-06
+
+#### Objetivo (!obrigatório)
+Corrigir paths para GEE Code Editor e otimizar scripts para evitar erro de memoria.
+
+#### Contexto (!obrigatório)
+Scripts originais usavam path `agr1model` mas repositorio GEE usa `agrimodel`. Alem disso, o processamento de SP inteiro causava erro "User memory limit exceeded" no GEE.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** scripts/ndwi/*.js, scripts/utils/sentinel2_utils.js, shape_files/, README.md
+- **Dependências necessárias:** nenhuma
+- **Impacto em funcionalidades existentes:** scripts agora compativeis com GEE Code Editor
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Paths ajustados de agr1model para agrimodel
+- [x] ASSET_BASE ajustado para users/luquinhas_gonzales/
+- [x] Geometria simplificada com maxError 1000m
+- [x] Escala de visualizacao aumentada para 500m
+- [x] Limite de imagens para processamento (50 por ano)
+- [x] Shapefiles adicionados ao repositorio
+- [x] Badges de stack no README
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-06 | 1 | Ajustados paths, otimizacoes memoria, shapefiles | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-06
+- **Branch:** feat/TASK-005-009-ndwi-analysis
+- **Commit(s):** f4fa801, e2a3f46, 51603cd
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Escala 500m para visualizacao, 100m para exportacao
+
+---
+
+### TASK-009
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-05
+
+#### Objetivo (!obrigatório)
+Criar script que identifica regiões com valores extremos e mudanças significativas no período.
+
+#### Contexto (!obrigatório)
+Análise de hotspots para responder: "Há regiões que se destacam com valores muito maiores?" e "Houve regiões que se destacaram por aumento do decremento nos últimos 10 anos?"
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** scripts/ndwi/04_hotspots_analise.js (novo)
+- **Dependências necessárias:** Scripts 02 e 03
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Identifica regiões com NDWI médio acima do percentil 90 (hotspots de água)
+- [x] Identifica regiões com maior variação positiva (ganho de água)
+- [x] Identifica regiões com maior variação negativa (perda de água)
+- [x] Análise por município ou região geográfica de SP
+- [x] Gera gráficos/charts comparativos
+- [x] Comentários em PT-BR explicando cada linha
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-05 | 1 | Criado 04_hotspots_analise.js com ranking de municipios | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-05
+- **Branch:** feat/TASK-005-009-ndwi-analysis
+- **Commit(s):** a2fffae
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Inclui ranking top 10 municipios, graficos e exportacao CSV
+
+---
+
+### TASK-008
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-05
+
+#### Objetivo (!obrigatório)
+Criar script que calcula diferença de NDWI entre 2015 e 2025, identificando incremento/decremento.
+
+#### Contexto (!obrigatório)
+Análise de variação temporal para responder: "Houve aumento ou redução no índice de água para SP no período analisado?" e "Quais regiões tiveram incremento ou decremento?"
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** scripts/ndwi/03_variacao_temporal.js (novo)
+- **Dependências necessárias:** Script 02_media_anual.js
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Calcula diferença: NDWI_2025 - NDWI_2015
+- [x] Classifica pixels em: incremento (>0), estável (~0), decremento (<0)
+- [x] Gera estatísticas de área para cada classe
+- [x] Visualização com cores divergentes (azul=aumento, vermelho=redução)
+- [x] Responde se houve aumento ou redução geral no estado
+- [x] Comentários em PT-BR explicando cada linha
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-05 | 1 | Criado 03_variacao_temporal.js com histograma | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-05
+- **Branch:** feat/TASK-005-009-ndwi-analysis
+- **Commit(s):** 1d83049
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Inclui classificacao em 3 classes e histograma de variacao
+
+---
+
+### TASK-007
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-05
+
+#### Objetivo (!obrigatório)
+Criar script que gera imagens de média anual de NDWI para cada ano (2015-2025).
+
+#### Contexto (!obrigatório)
+Para análise temporal, é necessário agregar as imagens NDWI em composições anuais usando a média. Isso reduz ruído e permite comparação entre anos.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** scripts/ndwi/02_media_anual.js (novo)
+- **Dependências necessárias:** Script 01_coleta_ndwi.js
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Gera uma imagem de média NDWI para cada ano (2015-2025)
+- [x] Cria ImageCollection com as 11 imagens anuais
+- [x] Visualização no mapa com paleta de cores apropriada
+- [x] Exporta imagens anuais como Assets ou Drive
+- [x] Comentários em PT-BR explicando cada linha
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-05 | 1 | Criado 02_media_anual.js com grafico temporal | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-05
+- **Branch:** feat/TASK-005-009-ndwi-analysis
+- **Commit(s):** 62c834a
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Inclui grafico de serie temporal e estatisticas por ano
+
+---
+
+### TASK-006
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** major
+- **Data de criação:** 2026-05-05
+
+#### Objetivo (!obrigatório)
+Criar script GEE que coleta imagens Sentinel-2 (2015-2025) para SP e calcula NDWI para cada cena.
+
+#### Contexto (!obrigatório)
+Base do projeto de análise temporal de NDWI. O script deve filtrar a coleção Sentinel-2, aplicar máscara de nuvens, calcular NDWI usando bandas Green (B3) e NIR (B8), e recortar para a área de SP usando o shapefile carregado.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** scripts/ndwi/01_coleta_ndwi.js (novo), scripts/utils/sentinel2_utils.js (novo)
+- **Dependências necessárias:** Asset SP_UF_2024 no GEE
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Script carrega shapefile de SP do GEE Assets
+- [x] Filtra Sentinel-2 por data (2015-06-01 a 2025-12-31) e área
+- [x] Aplica máscara de nuvens usando banda QA60
+- [x] Calcula NDWI = (Green - NIR) / (Green + NIR)
+- [x] Exporta coleção de imagens NDWI recortadas para SP
+- [x] Comentários em PT-BR explicando cada linha
+
+#### Restrições (opcional)
+- Usar Sentinel-2 Surface Reflectance (COPERNICUS/S2_SR_HARMONIZED)
+- Comentários obrigatórios em português
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-05 | 1 | Criados sentinel2_utils.js e 01_coleta_ndwi.js | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-05
+- **Branch:** feat/TASK-005-009-ndwi-analysis
+- **Commit(s):** dc3ad5d, b2987bb
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Modulo utils com funcoes reutilizaveis. Script 01 com pipeline completo.
+
+---
+
+### TASK-005
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** patch
+- **Data de criação:** 2026-05-05
+
+#### Objetivo (!obrigatório)
+Criar documentação de setup para upload dos shapefiles de SP para GEE Assets.
+
+#### Contexto (!obrigatório)
+Os shapefiles do estado de São Paulo (SP_UF_2024.zip, SP_Municipios_2024.zip, etc.) precisam ser carregados como Assets no GEE para serem utilizados nos scripts de análise NDWI.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** docs/gee-assets-setup.md (novo)
+- **Dependências necessárias:** nenhuma
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Documentação criada com instruções de upload para GEE
+- [x] Asset IDs documentados para uso nos scripts
+- [x] Instruções para extração dos .zip e upload via Code Editor
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-05 | 1 | Criado docs/gee-assets-setup.md | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-05
+- **Branch:** feat/TASK-005-009-ndwi-analysis
+- **Commit(s):** 429689d
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Documentação completa com Asset IDs e instruções de upload
+
+---
+
 ### TASK-004
 - **Status:** concluída
 - **Modo:** desenvolvimento
