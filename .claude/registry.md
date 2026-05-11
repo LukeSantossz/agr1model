@@ -18,7 +18,7 @@
 
 | # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observações |
 |---|------|------|--------------|-----------------|-----------|-------------|
-| 13 | 2026-05-10 | TASK-012 | minor | estrutura .claude/, CLAUDE.md | aprovado | Migração framework v1.1.0 |
+| 13 | 2026-05-10 | TASK-012 | minor | 34 arquivos — .claude/, CLAUDE.md | aprovado | Migração framework v1.1.0, commit e5a72fe |
 | 12 | 2026-05-06 | TASK-000 | major | 5 arquivos — .ai/hooks/, .ai/enforcement.conf | aprovado | Git hooks enforcement implementado |
 | 11 | 2026-05-06 | TASK-011 | minor | 2 arquivos — .ai/tasks.md, .ai/registry.md | aprovado | Correcoes organizacionais auditoria |
 | 10 | 2026-05-06 | TASK-010 | minor | 6 arquivos — scripts/, shape_files/, README.md | aprovado | GEE paths fix, memory optimization |
