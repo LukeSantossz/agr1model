@@ -96,6 +96,13 @@ Cada critério deve ser verificável — sim ou não, passou ou não passou.]
 
 > Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
 
+### TASK-013 | patch
+- **Status:** concluída
+- **Objetivo:** Corrigir referência `.ai/` para `.claude/` na estrutura do README após migração do framework
+- **Arquivo(s):** README.md
+- **Branch:** feat/TASK-005-009-ndwi-analysis
+- **Resultado:** aprovado — estrutura do projeto no README reflete o diretório `.claude/` (alinhado à TASK-012)
+
 ### TASK-012
 - **Status:** concluída
 - **Modo:** desenvolvimento
