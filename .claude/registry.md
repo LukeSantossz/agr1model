@@ -8,7 +8,7 @@
 ## Informações do Projeto
 
 - **Nome:** agr1model
-- **Stack:** JavaScript (Google Earth Engine)
+- **Stack:** JavaScript (Google Earth Engine) + Python (análise estatística/correlação)
 - **Repositório:** LukeSantossz/agr1model
 - **Estrutura:** Scripts GEE para NDWI — scripts/ndwi/, scripts/utils/, docs/, data/
 
@@ -18,6 +18,7 @@
 
 | # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observações |
 |---|------|------|--------------|-----------------|-----------|-------------|
+| 20 | 2026-05-20 | TASK-027 | minor | 3 arquivos — CLAUDE.md, registry.md, tasks.md | aprovado | Adota Python na stack; resolve decisão pendente das TASK-023/024 |
 | 19 | 2026-05-20 | TASK-018 | minor | 2 arquivos — tasks.md, registry.md | aprovado | Mapeia backlog do Notion (TASK-019–026) e remove tasks_notion.md |
 | 18 | 2026-05-20 | TASK-017 | minor | 2 arquivos — scripts 04 + utils | aprovado | Renomeia ndwi2015/2025 → inicial/final; remove alias morto mascaraNuvensQA60 |
 | 17 | 2026-05-20 | TASK-016 | minor | 4 arquivos — tasks.md + scripts 01/02/03 | aprovado | Reconcilia datas (2017) e máscara (SCL) com a implementação |
@@ -44,8 +45,8 @@
 
 - **Última atualização:** 2026-05-20
 - **Último responsável:** Claude Code (Opus 4.7)
-- **Branch ativa:** docs/TASK-018-mapeia-backlog-notion
-- **Última task concluída:** TASK-018
+- **Branch ativa:** chore/TASK-027-adota-python-stack
+- **Última task concluída:** TASK-027
 - **Backlog ativo:** TASK-019 a TASK-026 (pendentes, importadas do Notion)
 
 ## Pendências Conhecidas
@@ -66,14 +67,16 @@
 | AGR-T8 | Análise interpretativa (3 perguntas) | TASK-020 | Pendente (dados existem) |
 | AGR-T9 | Melhorar paletas + legenda | TASK-021 | Pendente |
 | AGR-T10 | NDWI via Landsat (2005-2015) | TASK-022 | Pendente |
-| AGR-T11 | Correlação NDWI × precipitação | TASK-023 | Pendente (decisão de stack Python) |
-| AGR-T12 | Diferença estatística entre anos | TASK-024 | Pendente (decisão de stack Python) |
+| AGR-T11 | Correlação NDWI × precipitação | TASK-023 | Pendente |
+| AGR-T12 | Diferença estatística entre anos | TASK-024 | Pendente |
 | AGR-T13 | Outros índices espectrais | TASK-025 | Pendente |
 | AGR-T14 | Revisão de literatura La Niña | TASK-026 | Pendente |
 
 ## Decisões Técnicas Relevantes
 
 > Decisões tomadas durante implementações que afetam futuras tasks. Inclua justificativa breve.
+
+- **Adoção de Python na stack (2026-05-20, TASK-027):** Python autorizado pelo usuário para análise estatística/correlação (TASK-023 correlação com precipitação; TASK-024 ANOVA/Kruskal-Wallis), que não são viáveis nativamente no GEE. Stack passa a ser JavaScript (GEE) + Python. Dependências previstas: pandas, scipy, statsmodels, matplotlib. Resolve a "decisão de stack pendente" das TASK-023/024.
 
 - **Migração .ai/ → .claude/ v1.1.0:** Framework atualizado para v1.1.0. Regras 10-12 consolidadas: engenharia agêntica integrada em 01/03, guias Codex e Portfólio extraídos para `.claude/guides/`. Templates movidos para `.claude/templates/`.
 

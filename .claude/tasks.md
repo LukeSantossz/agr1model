@@ -294,7 +294,7 @@ Validar o NDWI como proxy de variação hídrica superficial em resposta à pluv
 - [ ] Script versionado
 
 #### Restrições (opcional)
-**DECISÃO DE STACK PENDENTE** — o Notion especifica Python (pandas/scipy), que diverge da stack declarada JS/GEE (CLAUDE.md). Confirmar com o usuário antes de implementar (regra 07.3 / 00.4). Alternativa: correlação via GEE (`ee.Reducer.pearsonsCorrelation`). Série curta (n≈9) limita poder estatístico; considerar análise com lag.
+Stack Python autorizada (2026-05-20, TASK-027) — usar pandas/scipy. A alternativa em GEE (`ee.Reducer.pearsonsCorrelation`) permanece válida se preferir evitar dependência local. Série curta (n≈9) limita poder estatístico; considerar análise com lag.
 
 #### Referências (opcional)
 Notion AGR-T11; CHIRPS Daily.
@@ -339,7 +339,7 @@ Validar formalmente se a variação temporal observada constitui sinal estatíst
 - [ ] Resultado documentado e versionado
 
 #### Restrições (opcional)
-**DECISÃO DE STACK PENDENTE** — ANOVA/Kruskal-Wallis não são nativos do GEE; exigem Python, divergindo da stack JS/GEE. Confirmar adoção de Python antes de implementar. Independência entre anos questionável em série temporal — documentar como limitação.
+Stack Python autorizada (2026-05-20, TASK-027) — usar scipy/statsmodels (ANOVA/Kruskal-Wallis não são nativos do GEE). Independência entre anos questionável em série temporal — documentar como limitação.
 
 #### Referências (opcional)
 Notion AGR-T12.
@@ -449,6 +449,13 @@ Notion AGR-T14.
 ## Tasks Concluídas
 
 > Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
+
+### TASK-027 | minor
+- **Status:** concluída
+- **Objetivo:** Registrar a adoção de Python na stack do projeto e resolver a decisão pendente das TASK-023/024
+- **Arquivo(s):** CLAUDE.md, .claude/registry.md, .claude/tasks.md
+- **Branch:** chore/TASK-027-adota-python-stack
+- **Resultado:** aprovado — Python autorizado pelo usuário (2026-05-20); stack passa a JS/GEE + Python; flags "DECISÃO DE STACK PENDENTE" removidos das TASK-023/024; deps previstas pandas/scipy/statsmodels/matplotlib
 
 ### TASK-018 | minor
 - **Status:** concluída

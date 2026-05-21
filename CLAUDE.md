@@ -84,7 +84,7 @@ Caminho: C:\Users\lucas\OneDrive\Desktop\llm-wiki\wiki\
 ## Informações do Projeto
 
 - **Nome:** agr1model
-- **Stack:** JavaScript (Google Earth Engine)
+- **Stack:** JavaScript (Google Earth Engine) + Python (análise estatística/correlação)
 - **Repositório:** LukeSantossz/agr1model
 - **Estrutura:** scripts/ndwi/, scripts/utils/, docs/, data/
 
