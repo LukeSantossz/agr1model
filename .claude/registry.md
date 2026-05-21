@@ -18,6 +18,7 @@
 
 | # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observações |
 |---|------|------|--------------|-----------------|-----------|-------------|
+| 19 | 2026-05-20 | TASK-018 | minor | 2 arquivos — tasks.md, registry.md | aprovado | Mapeia backlog do Notion (TASK-019–026) e remove tasks_notion.md |
 | 18 | 2026-05-20 | TASK-017 | minor | 2 arquivos — scripts 04 + utils | aprovado | Renomeia ndwi2015/2025 → inicial/final; remove alias morto mascaraNuvensQA60 |
 | 17 | 2026-05-20 | TASK-016 | minor | 4 arquivos — tasks.md + scripts 01/02/03 | aprovado | Reconcilia datas (2017) e máscara (SCL) com a implementação |
 | 16 | 2026-05-20 | TASK-015 | minor | 5 arquivos — configs de agentes | aprovado | Atualiza refs .ai → .claude (migração TASK-012 incompleta) |
@@ -43,12 +44,32 @@
 
 - **Última atualização:** 2026-05-20
 - **Último responsável:** Claude Code (Opus 4.7)
-- **Branch ativa:** refactor/TASK-017-renomeia-identificadores
-- **Última task concluída:** TASK-017
+- **Branch ativa:** docs/TASK-018-mapeia-backlog-notion
+- **Última task concluída:** TASK-018
+- **Backlog ativo:** TASK-019 a TASK-026 (pendentes, importadas do Notion)
 
 ## Pendências Conhecidas
 
 - [nenhuma registrada]
+
+## Rastreabilidade Notion → .claude
+
+> Mapa do backlog do Notion (board AGR, extração 2026-05-20) para as tasks deste projeto. Preservado na TASK-018 antes da remoção do `tasks_notion.md` (fonte). "Concluída" = entregue no código; "Pendente" = aguardando implementação.
+
+| Notion | Descrição | Equivalente .claude | Status |
+|--------|-----------|---------------------|--------|
+| AGR-T3 | Obter imagens NDWI da série | TASK-006 | Concluída |
+| AGR-T4 | Formulação NDWI (McFeeters × Gao) | TASK-019 | Pendente |
+| AGR-T5 | Shapefile de municípios SP no GEE | TASK-005 + TASK-010 | Concluída |
+| AGR-T6 | Composição de média anual | TASK-007 | Concluída |
+| AGR-T7 | Delta NDWI por município | TASK-008 + TASK-009 | Concluída |
+| AGR-T8 | Análise interpretativa (3 perguntas) | TASK-020 | Pendente (dados existem) |
+| AGR-T9 | Melhorar paletas + legenda | TASK-021 | Pendente |
+| AGR-T10 | NDWI via Landsat (2005-2015) | TASK-022 | Pendente |
+| AGR-T11 | Correlação NDWI × precipitação | TASK-023 | Pendente (decisão de stack Python) |
+| AGR-T12 | Diferença estatística entre anos | TASK-024 | Pendente (decisão de stack Python) |
+| AGR-T13 | Outros índices espectrais | TASK-025 | Pendente |
+| AGR-T14 | Revisão de literatura La Niña | TASK-026 | Pendente |
 
 ## Decisões Técnicas Relevantes
 

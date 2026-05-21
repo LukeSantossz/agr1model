@@ -91,10 +91,371 @@ Cada critério deve ser verificável — sim ou não, passou ou não passou.]
 
 > Tasks em andamento ou pendentes de implementação. O agente só pode trabalhar em tasks listadas aqui.
 > **Regra de ordenação:** A primeira task listada é a task ativa. O agente trabalha nela até conclusão, descarte ou bloqueio explícito pelo usuário.
+>
+> **Origem:** Backlog importado do Notion (AGR-T*) na TASK-018. Mapa de rastreabilidade em `registry.md`.
+
+### TASK-019
+- **Status:** pendente
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-20
+
+#### Objetivo (!obrigatório)
+Pesquisar e documentar a formulação do NDWI (McFeeters 1996 × Gao 1996) e justificar a adotada no projeto.
+
+#### Contexto (!obrigatório)
+A escolha da formulação define as bandas usadas em todo o pipeline. McFeeters (Green/NIR) detecta corpos d'água superficiais; Gao (NIR/SWIR) detecta umidade da vegetação. A implementação atual já usa McFeeters (Green B3 / NIR B8), mas a decisão nunca foi documentada — esta task a registra retroativamente. Origem: Notion AGR-T4.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** docs/ndwi-formulacao.md (novo); registry.md (nota de decisão)
+- **Dependências necessárias:** nenhuma
+- **Impacto em funcionalidades existentes:** nenhum (documenta a escolha já implementada)
+
+#### Critérios de Aceite (!obrigatório)
+- [ ] Definição formal do NDWI documentada
+- [ ] Diferenças entre Gao (1996) e McFeeters (1996) documentadas
+- [ ] Formulação adotada (McFeeters) justificada para o contexto de água superficial
+- [ ] Bandas Sentinel-2 correspondentes identificadas (B3 Green, B8 NIR)
+
+#### Restrições (opcional)
+Documentar a decisão já refletida no código; não alterar a fórmula sem nova task.
+
+#### Referências (opcional)
+McFeeters (1996); Gao (1996); Notion AGR-T4.
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| —    | —      | —              | —               |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** —
+- **Branch:** —
+- **Commit(s):** —
+- **Avaliação pós-implementação:** —
+- **Observações:** —
+
+---
+
+### TASK-020
+- **Status:** pendente
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-20
+
+#### Objetivo (!obrigatório)
+Produzir relatório de análise interpretativa respondendo às 3 perguntas de pesquisa do projeto sobre a variação do NDWI em SP.
+
+#### Contexto (!obrigatório)
+Os scripts já geram os dados (rankings municipais, histogramas, gráficos de variação 2017-2025), mas não há relatório consolidando as respostas. Perguntas: (1) houve aumento/redução geral do índice de água em SP no período? (2) há regiões com NDWI muito maior/menor? (3) houve regiões com aumento/decremento expressivo nos últimos anos? Origem: Notion AGR-T8.
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** docs/analise-interpretativa-ndwi.md (novo)
+- **Dependências necessárias:** TASK-026 (referencial La Niña como apoio); usa saídas de TASK-008 e TASK-009 (concluídas)
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [ ] As 3 perguntas respondidas com base nos dados gerados pelos scripts
+- [ ] Regiões de destaque (positivo e negativo) identificadas e nomeadas
+- [ ] Análise documentada como relatório/nota técnica no repositório
+
+#### Restrições (opcional)
+Basear-se nas saídas existentes; não reimplementar análise.
+
+#### Referências (opcional)
+Notion AGR-T8; scripts 03_variacao_temporal.js e 04_hotspots_analise.js.
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| —    | —      | —              | —               |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** —
+- **Branch:** —
+- **Commit(s):** —
+- **Avaliação pós-implementação:** —
+- **Observações:** —
+
+---
+
+### TASK-021
+- **Status:** pendente
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-20
+
+#### Objetivo (!obrigatório)
+Melhorar as paletas de cores e adicionar legenda na visualização do NDWI no GEE.
+
+#### Contexto (!obrigatório)
+A visualização atual usa `visParamsNDWI` básico, sem legenda. Ajustar faixa de valores, paleta divergente e legenda torna a representação mais clara e alinhada a convenções de sensoriamento remoto. Origem: Notion AGR-T9 (Sprint 2, Improvement).
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** scripts de visualização (`Map.addLayer`/`visParams`) — ex. 02_media_anual.js, 04_hotspots_analise.js; scripts/utils/sentinel2_utils.js (`visParamsNDWI`)
+- **Dependências necessárias:** TASK-007 (concluída)
+- **Impacto em funcionalidades existentes:** apenas visual; sem mudança de cálculo
+
+#### Critérios de Aceite (!obrigatório)
+- [ ] Paleta de cores atualizada com justificativa da escolha
+- [ ] Faixa de valores (min/max) ajustada de forma representativa
+- [ ] Legenda visível e legível no mapa GEE (`ui.Panel`)
+- [ ] Script versionado
+
+#### Restrições (opcional)
+Não alterar a lógica de cálculo do NDWI.
+
+#### Referências (opcional)
+Notion AGR-T9; GEE Community Catalog (paletas de referência).
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| —    | —      | —              | —               |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** —
+- **Branch:** —
+- **Commit(s):** —
+- **Avaliação pós-implementação:** —
+- **Observações:** —
+
+---
+
+### TASK-022
+- **Status:** pendente
+- **Modo:** desenvolvimento
+- **Complexidade:** major
+- **Data de criação:** 2026-05-20
+
+#### Objetivo (!obrigatório)
+Verificar o comportamento do NDWI na década anterior (2005-2015) usando Landsat, para comparar com a série Sentinel-2.
+
+#### Contexto (!obrigatório)
+Avaliar se as anomalias do NDWI (2017-2025, Sentinel-2) são tendência de longo prazo ou restritas à última década, usando Landsat 5/7/8 conforme disponibilidade. Origem: Notion AGR-T10 (Sprint 2).
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** scripts/ndwi/05_ndwi_landsat_2005_2015.js (novo)
+- **Dependências necessárias:** GEE — LANDSAT/LT05/C02/T1_L2, LANDSAT/LE07/C02/T1_L2, LANDSAT/LC08/C02/T1_L2; TASK-007 (método de composição anual)
+- **Impacto em funcionalidades existentes:** nenhum (script independente)
+
+#### Critérios de Aceite (!obrigatório)
+- [ ] Script GEE funcional para Landsat no período 2005-2015
+- [ ] NDWI calculado com as bandas corretas do sensor escolhido
+- [ ] Composições anuais geradas pelo mesmo método de TASK-007
+- [ ] Comparação visual/numérica com a série Sentinel-2 documentada
+- [ ] Script versionado
+
+#### Restrições (opcional)
+Preferir L5 até 2012 e L8 a partir de 2013 (L7 com falha SLC pós-2003); documentar diferença de resolução (30m Landsat vs 10m Sentinel-2).
+
+#### Referências (opcional)
+Notion AGR-T10.
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| —    | —      | —              | —               |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** —
+- **Branch:** —
+- **Commit(s):** —
+- **Avaliação pós-implementação:** —
+- **Observações:** —
+
+---
+
+### TASK-023
+- **Status:** pendente
+- **Modo:** desenvolvimento
+- **Complexidade:** major
+- **Data de criação:** 2026-05-20
+
+#### Objetivo (!obrigatório)
+Verificar correlação estatística entre o NDWI médio anual e a precipitação acumulada (CHIRPS) para SP no período.
+
+#### Contexto (!obrigatório)
+Validar o NDWI como proxy de variação hídrica superficial em resposta à pluviometria. Origem: Notion AGR-T11 (Sprint 2).
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** analysis/correlation_ndwi_precip.py (novo) OU script GEE equivalente (ver Restrições)
+- **Dependências necessárias:** GEE — UCSB-CHG/CHIRPS/DAILY; Python — pandas, scipy.stats (se via Python); TASK-008 (séries NDWI)
+- **Impacto em funcionalidades existentes:** introduz dimensão de análise estatística
+
+#### Critérios de Aceite (!obrigatório)
+- [ ] Série de precipitação extraída para o mesmo período e área do NDWI
+- [ ] Correlação implementada com justificativa do teste (Pearson/Spearman conforme normalidade)
+- [ ] Resultado documentado (coeficiente, p-valor, scatter plot)
+- [ ] Script versionado
+
+#### Restrições (opcional)
+**DECISÃO DE STACK PENDENTE** — o Notion especifica Python (pandas/scipy), que diverge da stack declarada JS/GEE (CLAUDE.md). Confirmar com o usuário antes de implementar (regra 07.3 / 00.4). Alternativa: correlação via GEE (`ee.Reducer.pearsonsCorrelation`). Série curta (n≈9) limita poder estatístico; considerar análise com lag.
+
+#### Referências (opcional)
+Notion AGR-T11; CHIRPS Daily.
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| —    | —      | —              | —               |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** —
+- **Branch:** —
+- **Commit(s):** —
+- **Avaliação pós-implementação:** —
+- **Observações:** —
+
+---
+
+### TASK-024
+- **Status:** pendente
+- **Modo:** desenvolvimento
+- **Complexidade:** major
+- **Data de criação:** 2026-05-20
+
+#### Objetivo (!obrigatório)
+Verificar se existe diferença estatística significativa nos valores médios de NDWI entre os anos analisados.
+
+#### Contexto (!obrigatório)
+Validar formalmente se a variação temporal observada constitui sinal estatístico real ou flutuação dentro da variabilidade esperada. Origem: Notion AGR-T12 (Sprint 2).
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** analysis/ndwi_anova.py (novo)
+- **Dependências necessárias:** Python — scipy.stats, statsmodels, matplotlib/seaborn; TASK-007 (médias anuais)
+- **Impacto em funcionalidades existentes:** introduz dimensão de análise estatística
+
+#### Critérios de Aceite (!obrigatório)
+- [ ] Teste estatístico implementado com escolha justificada (ANOVA ou Kruskal-Wallis)
+- [ ] p-valor calculado e interpretado
+- [ ] Post-hoc executado se significativo (Tukey HSD ou Dunn + Bonferroni)
+- [ ] Visualização dos grupos (boxplot)
+- [ ] Resultado documentado e versionado
+
+#### Restrições (opcional)
+**DECISÃO DE STACK PENDENTE** — ANOVA/Kruskal-Wallis não são nativos do GEE; exigem Python, divergindo da stack JS/GEE. Confirmar adoção de Python antes de implementar. Independência entre anos questionável em série temporal — documentar como limitação.
+
+#### Referências (opcional)
+Notion AGR-T12.
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| —    | —      | —              | —               |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** —
+- **Branch:** —
+- **Commit(s):** —
+- **Avaliação pós-implementação:** —
+- **Observações:** —
+
+---
+
+### TASK-025
+- **Status:** pendente
+- **Modo:** desenvolvimento
+- **Complexidade:** major
+- **Data de criação:** 2026-05-20
+
+#### Objetivo (!obrigatório)
+Avaliar índices espectrais complementares ao NDWI e implementar ao menos um no GEE.
+
+#### Contexto (!obrigatório)
+Task exploratória que subsidia decisões futuras sobre expansão do pipeline analítico para monitoramento hídrico/agrícola. Origem: Notion AGR-T13 (Sprint 2).
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** docs/indices-espectrais.md (novo); scripts/ndwi/06_indices_complementares.js (novo)
+- **Dependências necessárias:** GEE — Sentinel-2 SR; TASK-006 (pipeline base)
+- **Impacto em funcionalidades existentes:** nenhum (script independente)
+
+#### Critérios de Aceite (!obrigatório)
+- [ ] Ao menos 3 índices avaliados com justificativa (ex.: NDVI, EVI, LSWI, MNDWI, SAVI)
+- [ ] Ao menos 1 índice adicional implementado no GEE
+- [ ] Comparação visual com o NDWI documentada
+- [ ] Documento de decisão registrado
+
+#### Restrições (opcional)
+Limitar a no máximo 5 índices; priorizar os que usam bandas já disponíveis no Sentinel-2.
+
+#### Referências (opcional)
+Notion AGR-T13.
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| —    | —      | —              | —               |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** —
+- **Branch:** —
+- **Commit(s):** —
+- **Avaliação pós-implementação:** —
+- **Observações:** —
+
+---
+
+### TASK-026
+- **Status:** pendente
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-20
+
+#### Objetivo (!obrigatório)
+Levantar e confirmar com literatura científica o comportamento da La Niña e seus impactos agrícolas em SP, correlacionando com a série NDWI.
+
+#### Contexto (!obrigatório)
+Fornecer embasamento científico para a análise interpretativa (TASK-020), correlacionando anos de La Niña da literatura com anos de maior variação no NDWI. Origem: Notion AGR-T14 (Sprint 2).
+
+#### Escopo Técnico (!obrigatório)
+- **Arquivos/módulos envolvidos:** docs/la-nina-sp-literatura.md (novo)
+- **Dependências necessárias:** nenhuma (apoia TASK-020)
+- **Impacto em funcionalidades existentes:** nenhum
+
+#### Critérios de Aceite (!obrigatório)
+- [ ] Ao menos 3 artigos relevantes identificados e resumidos
+- [ ] Correlação entre comportamento La Niña e padrões NDWI documentada (anos específicos)
+- [ ] Resumo com referências completas (autor, ano, título, DOI) registrado
+
+#### Restrições (opcional)
+Priorizar SciELO e repositórios de acesso aberto; ao menos uma referência peer-reviewed.
+
+#### Referências (opcional)
+Notion AGR-T14.
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| —    | —      | —              | —               |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** —
+- **Branch:** —
+- **Commit(s):** —
+- **Avaliação pós-implementação:** —
+- **Observações:** —
+
+---
 
 ## Tasks Concluídas
 
 > Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
+
+### TASK-018 | minor
+- **Status:** concluída
+- **Objetivo:** Mapear o backlog do Notion (8 tasks pendentes) em tasks.md e remover a fonte tasks_notion.md
+- **Arquivo(s):** .claude/tasks.md, .claude/registry.md, tasks_notion.md (removido)
+- **Branch:** docs/TASK-018-mapeia-backlog-notion
+- **Resultado:** aprovado — TASK-019 a TASK-026 criadas em "Tasks Ativas" conforme template; rastreabilidade Notion → .claude registrada no registry; AGR-T3/T5/T6/T7 já cobertas por TASK-005/006/007/008/009/010, logo só as faltantes foram mapeadas; tasks_notion.md (untracked) removido
 
 ### TASK-017 | minor
 - **Status:** concluída
