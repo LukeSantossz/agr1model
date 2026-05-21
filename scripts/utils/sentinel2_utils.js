@@ -66,9 +66,6 @@ var mascaraNuvensSCL = function(image) {
   return image.updateMask(mask);
 };
 
-// Alias para compatibilidade com codigo antigo
-var mascaraNuvensQA60 = mascaraNuvensSCL;
-
 // ============================================================================
 // FUNCAO: Calculo do NDWI (Normalized Difference Water Index)
 // ============================================================================
@@ -234,7 +231,6 @@ var visParamsNDWI = function() {
 
 // Exporta todas as funcoes para uso em outros scripts
 exports.mascaraNuvensSCL = mascaraNuvensSCL;
-exports.mascaraNuvensQA60 = mascaraNuvensQA60;  // Alias para compatibilidade
 exports.calcularNDWI = calcularNDWI;
 exports.selecionarNDWI = selecionarNDWI;
 exports.processarImagemNDWI = processarImagemNDWI;

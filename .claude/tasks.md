@@ -96,6 +96,13 @@ Cada critério deve ser verificável — sim ou não, passou ou não passou.]
 
 > Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
 
+### TASK-017 | minor
+- **Status:** concluída
+- **Objetivo:** Renomear identificadores enganosos detectados na TASK-016 — `ndwi2015`/`ndwi2025` em 04_hotspots e remover alias morto `mascaraNuvensQA60`
+- **Arquivo(s):** scripts/ndwi/04_hotspots_analise.js, scripts/utils/sentinel2_utils.js
+- **Branch:** refactor/TASK-017-renomeia-identificadores
+- **Resultado:** aprovado — `ndwiInicial`/`ndwiFinal` (espelham ANO_INICIAL/ANO_FINAL); alias `mascaraNuvensQA60` removido (sem consumidores). 03_variacao_temporal revisado: `ndwi2017`/`ndwi2025` mantidos (nomes corretos, não enganosos). Comportamento preservado (renomes locais + remoção de código morto)
+
 ### TASK-016 | minor
 - **Status:** concluída
 - **Objetivo:** Reconciliar critérios de aceite das TASK-006/007/008 e docstrings dos scripts 01/02/03 com a implementação real (datas 2017+, máscara SCL)
