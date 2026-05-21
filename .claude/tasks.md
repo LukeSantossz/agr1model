@@ -94,50 +94,6 @@ Cada critério deve ser verificável — sim ou não, passou ou não passou.]
 >
 > **Origem:** Backlog importado do Notion (AGR-T*) na TASK-018. Mapa de rastreabilidade em `registry.md`.
 
-### TASK-019
-- **Status:** pendente
-- **Modo:** desenvolvimento
-- **Complexidade:** minor
-- **Data de criação:** 2026-05-20
-
-#### Objetivo (!obrigatório)
-Pesquisar e documentar a formulação do NDWI (McFeeters 1996 × Gao 1996) e justificar a adotada no projeto.
-
-#### Contexto (!obrigatório)
-A escolha da formulação define as bandas usadas em todo o pipeline. McFeeters (Green/NIR) detecta corpos d'água superficiais; Gao (NIR/SWIR) detecta umidade da vegetação. A implementação atual já usa McFeeters (Green B3 / NIR B8), mas a decisão nunca foi documentada — esta task a registra retroativamente. Origem: Notion AGR-T4.
-
-#### Escopo Técnico (!obrigatório)
-- **Arquivos/módulos envolvidos:** docs/ndwi-formulacao.md (novo); registry.md (nota de decisão)
-- **Dependências necessárias:** nenhuma
-- **Impacto em funcionalidades existentes:** nenhum (documenta a escolha já implementada)
-
-#### Critérios de Aceite (!obrigatório)
-- [ ] Definição formal do NDWI documentada
-- [ ] Diferenças entre Gao (1996) e McFeeters (1996) documentadas
-- [ ] Formulação adotada (McFeeters) justificada para o contexto de água superficial
-- [ ] Bandas Sentinel-2 correspondentes identificadas (B3 Green, B8 NIR)
-
-#### Restrições (opcional)
-Documentar a decisão já refletida no código; não alterar a fórmula sem nova task.
-
-#### Referências (opcional)
-McFeeters (1996); Gao (1996); Notion AGR-T4.
-
-#### Log de Andamento (atualizado pelo agente)
-
-| Data | Sessão | Ação Realizada | Status ao Final |
-|------|--------|----------------|-----------------|
-| —    | —      | —              | —               |
-
-#### Resultado (preenchido ao concluir)
-- **Data de conclusão:** —
-- **Branch:** —
-- **Commit(s):** —
-- **Avaliação pós-implementação:** —
-- **Observações:** —
-
----
-
 ### TASK-020
 - **Status:** pendente
 - **Modo:** desenvolvimento
@@ -449,6 +405,36 @@ Notion AGR-T14.
 ## Tasks Concluídas
 
 > Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
+
+### TASK-019
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-20
+
+#### Objetivo (!obrigatório)
+Pesquisar e documentar a formulação do NDWI (McFeeters 1996 × Gao 1996) e justificar a adotada no projeto.
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Definição formal do NDWI documentada
+- [x] Diferenças entre Gao (1996) e McFeeters (1996) documentadas
+- [x] Formulação adotada (McFeeters) justificada para o contexto de água superficial
+- [x] Bandas Sentinel-2 correspondentes identificadas (B3 Green, B8 NIR)
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-20 | 1 | Criado docs/ndwi-formulacao.md; fórmulas e DOIs verificados (web) | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-20
+- **Branch:** docs/TASK-019-formulacao-ndwi
+- **Commit(s):** ver PR
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** McFeeters confirmado no código (`normalizedDifference(['B3','B8'])`); documentada a nuance de que Gao usa 0,86/1,24 µm e o Sentinel-2 não tem banda em 1,24 µm
+
+---
 
 ### TASK-027 | minor
 - **Status:** concluída
