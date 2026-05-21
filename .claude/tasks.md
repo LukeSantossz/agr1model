@@ -96,6 +96,13 @@ Cada critério deve ser verificável — sim ou não, passou ou não passou.]
 
 > Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
 
+### TASK-015 | minor
+- **Status:** concluída
+- **Objetivo:** Atualizar referências `.ai/` para `.claude/` nos pontos de entrada de agentes (migração TASK-012 incompleta)
+- **Arquivo(s):** .cursorrules, .windsurfrules, .github/copilot-instructions.md, AGENTS.md, CONTRIBUTING.md
+- **Branch:** fix/TASK-015-atualiza-refs-claude
+- **Resultado:** aprovado — 75 refs corrigidas; `.ai/pr-template.md` → `.claude/templates/pr-template.md`; regras 10-12 (extintas) remapeadas para `.claude/guides/` (codex, portfolio), regra 10 integrada em 01/03
+
 ### TASK-014 | minor
 - **Status:** concluída
 - **Objetivo:** Restaurar entradas TASK-001 a TASK-010 no tasks.md (perdidas na migração TASK-012) e corrigir caminhos de enforcement na TASK-000

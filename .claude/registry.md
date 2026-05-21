@@ -18,6 +18,7 @@
 
 | # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observações |
 |---|------|------|--------------|-----------------|-----------|-------------|
+| 16 | 2026-05-20 | TASK-015 | minor | 5 arquivos — configs de agentes | aprovado | Atualiza refs .ai → .claude (migração TASK-012 incompleta) |
 | 15 | 2026-05-20 | TASK-014 | minor | 2 arquivos — .claude/tasks.md, registry.md | aprovado | Restaura TASK-001–010 e corrige caminhos de enforcement na TASK-000 |
 | 14 | 2026-05-20 | TASK-013 | patch | 1 arquivo — README.md | aprovado | Corrige referência .ai → .claude na estrutura |
 | 13 | 2026-05-10 | TASK-012 | minor | 34 arquivos — .claude/, CLAUDE.md | aprovado | Migração framework v1.1.0, commit e5a72fe |
@@ -40,8 +41,8 @@
 
 - **Última atualização:** 2026-05-20
 - **Último responsável:** Claude Code (Opus 4.7)
-- **Branch ativa:** docs/TASK-014-restaura-tasks-001-010 (main já contém TASK-001–013 via PR #6)
-- **Última task concluída:** TASK-014
+- **Branch ativa:** fix/TASK-015-atualiza-refs-claude
+- **Última task concluída:** TASK-015
 
 ## Pendências Conhecidas
 
