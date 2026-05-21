@@ -18,6 +18,7 @@
 
 | # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observações |
 |---|------|------|--------------|-----------------|-----------|-------------|
+| 21 | 2026-05-20 | TASK-019 | minor | 2 arquivos — docs/ndwi-formulacao.md, registry.md | aprovado | Documenta formulação NDWI (McFeeters) e justifica a escolha |
 | 20 | 2026-05-20 | TASK-027 | minor | 3 arquivos — CLAUDE.md, registry.md, tasks.md | aprovado | Adota Python na stack; resolve decisão pendente das TASK-023/024 |
 | 19 | 2026-05-20 | TASK-018 | minor | 2 arquivos — tasks.md, registry.md | aprovado | Mapeia backlog do Notion (TASK-019–026) e remove tasks_notion.md |
 | 18 | 2026-05-20 | TASK-017 | minor | 2 arquivos — scripts 04 + utils | aprovado | Renomeia ndwi2015/2025 → inicial/final; remove alias morto mascaraNuvensQA60 |
@@ -45,9 +46,9 @@
 
 - **Última atualização:** 2026-05-20
 - **Último responsável:** Claude Code (Opus 4.7)
-- **Branch ativa:** chore/TASK-027-adota-python-stack
-- **Última task concluída:** TASK-027
-- **Backlog ativo:** TASK-019 a TASK-026 (pendentes, importadas do Notion)
+- **Branch ativa:** docs/TASK-019-formulacao-ndwi
+- **Última task concluída:** TASK-019
+- **Backlog ativo:** TASK-020 a TASK-026 (pendentes; TASK-019 concluída)
 
 ## Pendências Conhecidas
 
@@ -60,7 +61,7 @@
 | Notion | Descrição | Equivalente .claude | Status |
 |--------|-----------|---------------------|--------|
 | AGR-T3 | Obter imagens NDWI da série | TASK-006 | Concluída |
-| AGR-T4 | Formulação NDWI (McFeeters × Gao) | TASK-019 | Pendente |
+| AGR-T4 | Formulação NDWI (McFeeters × Gao) | TASK-019 | Concluída |
 | AGR-T5 | Shapefile de municípios SP no GEE | TASK-005 + TASK-010 | Concluída |
 | AGR-T6 | Composição de média anual | TASK-007 | Concluída |
 | AGR-T7 | Delta NDWI por município | TASK-008 + TASK-009 | Concluída |
@@ -75,6 +76,8 @@
 ## Decisões Técnicas Relevantes
 
 > Decisões tomadas durante implementações que afetam futuras tasks. Inclua justificativa breve.
+
+- **Formulação do NDWI = McFeeters (1996) (TASK-019):** Adotada a fórmula (Green − NIR)/(Green + NIR) — alvo: água superficial, coerente com o objetivo do projeto e com resolução de 10 m (B3/B8). A formulação de Gao (1996), voltada à umidade da vegetação, fica para avaliação futura (TASK-025). Detalhes e justificativa em `docs/ndwi-formulacao.md`.
 
 - **Adoção de Python na stack (2026-05-20, TASK-027):** Python autorizado pelo usuário para análise estatística/correlação (TASK-023 correlação com precipitação; TASK-024 ANOVA/Kruskal-Wallis), que não são viáveis nativamente no GEE. Stack passa a ser JavaScript (GEE) + Python. Dependências previstas: pandas, scipy, statsmodels, matplotlib. Resolve a "decisão de stack pendente" das TASK-023/024.
 
