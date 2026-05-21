@@ -82,11 +82,11 @@ var calcularMediaAnual = function(ano) {
 
 print('=== CALCULANDO IMAGENS BASE ===');
 
-// NDWI 2015, 2025 e media geral
-var ndwi2015 = calcularMediaAnual(ANO_INICIAL);
-var ndwi2025 = calcularMediaAnual(ANO_FINAL);
+// NDWI inicial, final e media geral
+var ndwiInicial = calcularMediaAnual(ANO_INICIAL);
+var ndwiFinal = calcularMediaAnual(ANO_FINAL);
 
-// Media de todos os anos (2015-2025) para analise de hotspots
+// Media de todos os anos (2017-2025) para analise de hotspots
 var listaAnos = ee.List.sequence(ANO_INICIAL, ANO_FINAL);
 var todasMedias = listaAnos.map(function(ano) {
   return calcularMediaAnual(ee.Number(ano).toInt());
@@ -94,7 +94,7 @@ var todasMedias = listaAnos.map(function(ano) {
 var ndwiMediaGeral = ee.ImageCollection.fromImages(todasMedias).mean().rename('NDWI');
 
 // Variacao temporal
-var variacao = ndwi2025.subtract(ndwi2015).rename('variacao');
+var variacao = ndwiFinal.subtract(ndwiInicial).rename('variacao');
 
 print('Imagens calculadas');
 
