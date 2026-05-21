@@ -96,6 +96,13 @@ Cada critério deve ser verificável — sim ou não, passou ou não passou.]
 
 > Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
 
+### TASK-016 | minor
+- **Status:** concluída
+- **Objetivo:** Reconciliar critérios de aceite das TASK-006/007/008 e docstrings dos scripts 01/02/03 com a implementação real (datas 2017+, máscara SCL)
+- **Arquivo(s):** .claude/tasks.md, scripts/ndwi/01_coleta_ndwi.js, scripts/ndwi/02_media_anual.js, scripts/ndwi/03_variacao_temporal.js
+- **Branch:** docs/TASK-016-reconcilia-criterios-ndwi
+- **Resultado:** aprovado — datas 2015→2017 e QA60→SCL alinhadas ao código real; pendência registrada: variável `ndwi2015` em 04_hotspots requer refatoração (proposta TASK-017)
+
 ### TASK-015 | minor
 - **Status:** concluída
 - **Objetivo:** Atualizar referências `.ai/` para `.claude/` nos pontos de entrada de agentes (migração TASK-012 incompleta)
@@ -330,7 +337,7 @@ Análise de hotspots para responder: "Há regiões que se destacam com valores m
 - **Data de criação:** 2026-05-05
 
 #### Objetivo (!obrigatório)
-Criar script que calcula diferença de NDWI entre 2015 e 2025, identificando incremento/decremento.
+Criar script que calcula diferença de NDWI entre 2017 e 2025, identificando incremento/decremento.
 
 #### Contexto (!obrigatório)
 Análise de variação temporal para responder: "Houve aumento ou redução no índice de água para SP no período analisado?" e "Quais regiões tiveram incremento ou decremento?"
@@ -341,7 +348,7 @@ Análise de variação temporal para responder: "Houve aumento ou redução no �
 - **Impacto em funcionalidades existentes:** nenhum
 
 #### Critérios de Aceite (!obrigatório)
-- [x] Calcula diferença: NDWI_2025 - NDWI_2015
+- [x] Calcula diferença: NDWI_2025 - NDWI_2017
 - [x] Classifica pixels em: incremento (>0), estável (~0), decremento (<0)
 - [x] Gera estatísticas de área para cada classe
 - [x] Visualização com cores divergentes (azul=aumento, vermelho=redução)
@@ -359,7 +366,7 @@ Análise de variação temporal para responder: "Houve aumento ou redução no �
 - **Branch:** feat/TASK-005-009-ndwi-analysis
 - **Commit(s):** 1d83049
 - **Avaliação pós-implementação:** aprovado
-- **Observações:** Inclui classificacao em 3 classes e histograma de variacao
+- **Observações:** Inclui classificacao em 3 classes e histograma de variacao. Critérios reconciliados na TASK-016: comparação real 2017 vs 2025 (S2_SR_HARMONIZED inicia em 2017).
 
 ---
 
@@ -370,7 +377,7 @@ Análise de variação temporal para responder: "Houve aumento ou redução no �
 - **Data de criação:** 2026-05-05
 
 #### Objetivo (!obrigatório)
-Criar script que gera imagens de média anual de NDWI para cada ano (2015-2025).
+Criar script que gera imagens de média anual de NDWI para cada ano (2017-2025).
 
 #### Contexto (!obrigatório)
 Para análise temporal, é necessário agregar as imagens NDWI em composições anuais usando a média. Isso reduz ruído e permite comparação entre anos.
@@ -381,8 +388,8 @@ Para análise temporal, é necessário agregar as imagens NDWI em composições 
 - **Impacto em funcionalidades existentes:** nenhum
 
 #### Critérios de Aceite (!obrigatório)
-- [x] Gera uma imagem de média NDWI para cada ano (2015-2025)
-- [x] Cria ImageCollection com as 11 imagens anuais
+- [x] Gera uma imagem de média NDWI para cada ano (2017-2025)
+- [x] Cria ImageCollection com as 9 imagens anuais
 - [x] Visualização no mapa com paleta de cores apropriada
 - [x] Exporta imagens anuais como Assets ou Drive
 - [x] Comentários em PT-BR explicando cada linha
@@ -398,7 +405,7 @@ Para análise temporal, é necessário agregar as imagens NDWI em composições 
 - **Branch:** feat/TASK-005-009-ndwi-analysis
 - **Commit(s):** 62c834a
 - **Avaliação pós-implementação:** aprovado
-- **Observações:** Inclui grafico de serie temporal e estatisticas por ano
+- **Observações:** Inclui grafico de serie temporal e estatisticas por ano. Critérios reconciliados na TASK-016: 9 composições anuais (2017-2025), pois S2_SR_HARMONIZED inicia em 2017.
 
 ---
 
@@ -409,7 +416,7 @@ Para análise temporal, é necessário agregar as imagens NDWI em composições 
 - **Data de criação:** 2026-05-05
 
 #### Objetivo (!obrigatório)
-Criar script GEE que coleta imagens Sentinel-2 (2015-2025) para SP e calcula NDWI para cada cena.
+Criar script GEE que coleta imagens Sentinel-2 (2017-2025) para SP e calcula NDWI para cada cena.
 
 #### Contexto (!obrigatório)
 Base do projeto de análise temporal de NDWI. O script deve filtrar a coleção Sentinel-2, aplicar máscara de nuvens, calcular NDWI usando bandas Green (B3) e NIR (B8), e recortar para a área de SP usando o shapefile carregado.
@@ -421,8 +428,8 @@ Base do projeto de análise temporal de NDWI. O script deve filtrar a coleção 
 
 #### Critérios de Aceite (!obrigatório)
 - [x] Script carrega shapefile de SP do GEE Assets
-- [x] Filtra Sentinel-2 por data (2015-06-01 a 2025-12-31) e área
-- [x] Aplica máscara de nuvens usando banda QA60
+- [x] Filtra Sentinel-2 por data (2017-03-28 a 2025-12-31) e área
+- [x] Aplica máscara de nuvens usando banda SCL
 - [x] Calcula NDWI = (Green - NIR) / (Green + NIR)
 - [x] Exporta coleção de imagens NDWI recortadas para SP
 - [x] Comentários em PT-BR explicando cada linha
@@ -442,7 +449,7 @@ Base do projeto de análise temporal de NDWI. O script deve filtrar a coleção 
 - **Branch:** feat/TASK-005-009-ndwi-analysis
 - **Commit(s):** dc3ad5d, b2987bb
 - **Avaliação pós-implementação:** aprovado
-- **Observações:** Modulo utils com funcoes reutilizaveis. Script 01 com pipeline completo.
+- **Observações:** Modulo utils com funcoes reutilizaveis. Script 01 com pipeline completo. Critérios reconciliados na TASK-016: intervalo real 2017-03-28→2025 (S2_SR_HARMONIZED disponível a partir de 2017-03-28) e máscara SCL (mais confiável que QA60).
 
 ---
 

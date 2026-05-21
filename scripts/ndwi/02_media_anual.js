@@ -1,8 +1,8 @@
 /**
  * SCRIPT 02 - MEDIA ANUAL DE NDWI PARA SAO PAULO
  *
- * Este script calcula a media anual do NDWI para cada ano de 2015 a 2025,
- * gerando uma ImageCollection com 11 imagens (uma por ano).
+ * Este script calcula a media anual do NDWI para cada ano de 2017 a 2025,
+ * gerando uma ImageCollection com 9 imagens (uma por ano).
  *
  * A media anual reduz ruidos e permite comparacao temporal entre anos.
  *
