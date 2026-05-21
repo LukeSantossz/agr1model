@@ -18,6 +18,7 @@
 
 | # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observações |
 |---|------|------|--------------|-----------------|-----------|-------------|
+| 15 | 2026-05-20 | TASK-014 | minor | 2 arquivos — .claude/tasks.md, registry.md | aprovado | Restaura TASK-001–010 e corrige caminhos de enforcement na TASK-000 |
 | 14 | 2026-05-20 | TASK-013 | patch | 1 arquivo — README.md | aprovado | Corrige referência .ai → .claude na estrutura |
 | 13 | 2026-05-10 | TASK-012 | minor | 34 arquivos — .claude/, CLAUDE.md | aprovado | Migração framework v1.1.0, commit e5a72fe |
 | 12 | 2026-05-06 | TASK-000 | major | 5 arquivos — .ai/hooks/, .ai/enforcement.conf | aprovado | Git hooks enforcement implementado |
@@ -39,8 +40,8 @@
 
 - **Última atualização:** 2026-05-20
 - **Último responsável:** Claude Code (Opus 4.7)
-- **Branch ativa:** feat/TASK-005-009-ndwi-analysis (PR aberta para merge na main)
-- **Última task concluída:** TASK-013
+- **Branch ativa:** docs/TASK-014-restaura-tasks-001-010 (main já contém TASK-001–013 via PR #6)
+- **Última task concluída:** TASK-014
 
 ## Pendências Conhecidas
 
