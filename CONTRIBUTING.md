@@ -11,11 +11,11 @@ Thank you for your interest in contributing. This document outlines our developm
 
 ## Development Workflow
 
-This project follows a structured workflow defined in `.ai/rules/`. Every contribution must adhere to these rules.
+This project follows a structured workflow defined in `.claude/rules/`. Every contribution must adhere to these rules.
 
 ### 1. Register a Task
 
-Before any implementation, create a task in `.ai/tasks.md`:
+Before any implementation, create a task in `.claude/tasks.md`:
 
 ```markdown
 ### TASK-NNN
@@ -42,7 +42,7 @@ git checkout -b feat/TASK-042-add-cloud-masking
 
 ### 3. Implement
 
-Follow the principles in `.ai/rules/01-principios.md`:
+Follow the principles in `.claude/rules/01-principios.md`:
 
 - Think before coding — expose assumptions and trade-offs
 - Simplicity first — minimal code that solves the problem
@@ -63,7 +63,7 @@ git commit -m "feat(ndwi): add cloud masking for Sentinel-2"
 
 ### 5. Create Pull Request
 
-Use the template in `.ai/pr-template.md`. Every PR must include:
+Use the template in `.claude/templates/pr-template.md`. Every PR must include:
 
 - Context and motivation
 - List of changes
@@ -86,7 +86,7 @@ This project is configured for multiple AI-powered IDEs. Each tool reads project
 
 ### AI Agent Rules
 
-All AI agents must follow the rules in `.ai/rules/`:
+All AI agents must follow the rules in `.claude/rules/`:
 
 | Rule | Purpose |
 |------|---------|
@@ -114,11 +114,11 @@ When starting a session, declare your operating mode:
 
 ### Critical Rules for AI Agents
 
-1. **Never implement without a registered task** in `.ai/tasks.md`
+1. **Never implement without a registered task** in `.claude/tasks.md`
 2. **Never invent APIs or methods** — verify against official documentation
 3. **Never modify code outside task scope** — document unrelated issues, don't fix silently
 4. **Always run post-implementation evaluation** after every change
-5. **Always update `.ai/registry.md`** after every implementation
+5. **Always update `.claude/registry.md`** after every implementation
 
 ### Setting Up Claude Code
 
@@ -219,7 +219,7 @@ git commit -m "WIP"
    git push -u origin feat/TASK-042-add-cloud-masking
    ```
 
-2. **Create PR** using the template in `.ai/pr-template.md`
+2. **Create PR** using the template in `.claude/templates/pr-template.md`
 
 3. **Self-review** in the "Files Changed" tab before requesting review
 
