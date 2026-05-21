@@ -1,7 +1,7 @@
 /**
  * SCRIPT 01 - COLETA E CALCULO DE NDWI PARA SAO PAULO
  *
- * Este script coleta imagens Sentinel-2 de 2015 a 2025 para o estado de SP,
+ * Este script coleta imagens Sentinel-2 de 2017 a 2025 para o estado de SP,
  * aplica mascara de nuvens e calcula o NDWI (Normalized Difference Water Index).
  *
  * NDWI = (Green - NIR) / (Green + NIR)
@@ -81,7 +81,7 @@ print('Imagens Sentinel-2 encontradas:', numImagensOriginal);
 print('=== PROCESSAMENTO ===');
 
 // Aplica o pipeline de processamento em cada imagem da colecao:
-// 1. Mascara de nuvens usando banda QA60
+// 1. Mascara de nuvens usando banda SCL
 // 2. Calculo do NDWI (Green - NIR) / (Green + NIR)
 // 3. Selecao apenas da banda NDWI
 // NOTA: Nao fazemos clip() aqui para economizar memoria - o clip sera feito apenas na visualizacao

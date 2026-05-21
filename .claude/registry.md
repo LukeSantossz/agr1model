@@ -18,6 +18,7 @@
 
 | # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observações |
 |---|------|------|--------------|-----------------|-----------|-------------|
+| 17 | 2026-05-20 | TASK-016 | minor | 4 arquivos — tasks.md + scripts 01/02/03 | aprovado | Reconcilia datas (2017) e máscara (SCL) com a implementação |
 | 16 | 2026-05-20 | TASK-015 | minor | 5 arquivos — configs de agentes | aprovado | Atualiza refs .ai → .claude (migração TASK-012 incompleta) |
 | 15 | 2026-05-20 | TASK-014 | minor | 2 arquivos — .claude/tasks.md, registry.md | aprovado | Restaura TASK-001–010 e corrige caminhos de enforcement na TASK-000 |
 | 14 | 2026-05-20 | TASK-013 | patch | 1 arquivo — README.md | aprovado | Corrige referência .ai → .claude na estrutura |
@@ -41,12 +42,12 @@
 
 - **Última atualização:** 2026-05-20
 - **Último responsável:** Claude Code (Opus 4.7)
-- **Branch ativa:** fix/TASK-015-atualiza-refs-claude
-- **Última task concluída:** TASK-015
+- **Branch ativa:** docs/TASK-016-reconcilia-criterios-ndwi
+- **Última task concluída:** TASK-016
 
 ## Pendências Conhecidas
 
-- [nenhuma registrada]
+- **TASK-017 (proposta):** identificadores enganosos remanescentes (não-funcionais), detectados na TASK-016 — requerem refatoração: (1) `scripts/ndwi/04_hotspots_analise.js` usa `ndwi2015`/`ndwi2025` e comentários "2015", embora calcule a partir de `ANO_INICIAL` (2017); (2) `scripts/utils/sentinel2_utils.js` mantém o alias `mascaraNuvensQA60` apontando para a máscara SCL (compatibilidade) — nome sugere QA60.
 
 ## Decisões Técnicas Relevantes
 

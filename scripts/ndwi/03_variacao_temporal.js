@@ -1,10 +1,10 @@
 /**
- * SCRIPT 03 - VARIACAO TEMPORAL DO NDWI (2015 vs 2025)
+ * SCRIPT 03 - VARIACAO TEMPORAL DO NDWI (2017 vs 2025)
  *
- * Este script calcula a diferenca de NDWI entre 2015 e 2025 para identificar
+ * Este script calcula a diferenca de NDWI entre 2017 e 2025 para identificar
  * regioes que tiveram incremento ou decremento no indice de agua.
  *
- * Variacao = NDWI_2025 - NDWI_2015
+ * Variacao = NDWI_2025 - NDWI_2017
  * - Valores positivos: AUMENTO de agua (ganho hidrico)
  * - Valores negativos: REDUCAO de agua (perda hidrica)
  * - Valores proximos de zero: estabilidade
