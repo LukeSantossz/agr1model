@@ -48,7 +48,7 @@ Estrutura obrigatória: `!type(?scope): !subject`
 | `ci` | Configuração de CI |
 | `revert` | Reversão de um commit anterior |
 
-Exemplos: `feat(auth): add Google OAuth integration`, `fix(api): handle 500 error on user endpoint`.
+Exemplos: `feat(auth): adiciona integração com Google`, `fix(api): trata erro 500 no endpoint de usuários`.
 
 **Restrições obrigatórias de commit:**
 
@@ -56,7 +56,7 @@ Exemplos: `feat(auth): add Google OAuth integration`, `fix(api): handle 500 erro
 - **Sem Co-authored-by:** Nunca inclua trailers de co-autoria (`Co-authored-by`, `Signed-off-by`, etc.). O responsável pelo commit é quem o executa. Código gerado por IA não tem autoria a ser creditada.
 - **Formato final do comando:** `git commit -m "type(scope): subject"` — nada além disso.
 
-**Dimensão pública do histórico:** Em repositórios públicos, o histórico de commits é leitura externa — vide regra 12 (Portfólio Público). Mensagens fora do padrão Conventional Commits comunicam amadorismo no portfólio independentemente da qualidade do código.
+**Dimensão pública do histórico:** Em repositórios públicos, o histórico de commits é leitura externa — vide guia de portfólio (`.claude/guides/guia-portfolio.md`). Mensagens fora do padrão Conventional Commits comunicam amadorismo no portfólio independentemente da qualidade do código.
 
 ## 5.3 Branches — Nomenclatura
 

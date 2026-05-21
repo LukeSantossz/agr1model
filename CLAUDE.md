@@ -1,42 +1,96 @@
-# agr1model — Diretrizes para Agentes de IA
+# CLAUDE.md — Ponto de Entrada do Framework de Desenvolvimento
 
-> **Fluxo mandatorio.** Leia TODOS os arquivos em `.ai/rules/` e `.ai/registry.md` antes de qualquer implementacao.
+> **Versão:** 1.1.0 | **Localização das regras:** `.claude/rules/` | **Estado:** `.claude/tasks.md` + `.claude/registry.md`
 
-## Projeto
+---
+
+## Trava de Segurança (Regra 00 — Incondicional)
+
+Nenhuma implementação, modificação, criação ou exclusão de código é permitida sem:
+
+1. **Task registrada** em `.claude/tasks.md`
+2. **Modo declarado** pelo usuário (Desenvolvimento, Review ou Tutor)
+3. **Codebase reconhecida** (regra 02 executada)
+4. **Registry verificado** (`.claude/registry.md` lido)
+
+Exceções: Modo Tutor e Review podem iniciar sem task, mas qualquer modificação de código exige registro prévio. Detalhes completos: `.claude/rules/00-trava-seguranca.md`.
+
+## Princípios Core (Regra 01)
+
+- Pense antes de codar. Declare premissas, exponha trade-offs, pergunte se ambíguo.
+- Simplicidade primeiro. Código mínimo, sem features especulativas, sem abstração prematura.
+- Mudanças cirúrgicas. Toque apenas o necessário. Limpe apenas a própria sujeira.
+- Todo código gerado por agente é rascunho até ser revisado e compreendido pelo desenvolvedor.
+
+## Início de Sessão — O Que Ler
+
+### Sempre (toda sessão):
+
+1. Este arquivo (`CLAUDE.md`)
+2. `.claude/registry.md` → estado atual, última implementação, pendências
+3. `.claude/tasks.md` → **apenas a seção "Tasks Ativas"**, não carregar Tasks Concluídas
+
+### Sob demanda (quando a condição ativar):
+
+| Condição | Ler |
+|----------|-----|
+| Projeto novo ou primeira sessão | `.claude/prd.md` (se existir) |
+| Task `minor` ou `major` | Regras 04 (avaliação) + 06 (CRURA) + 08 (registro) |
+| Task `patch` | Apenas regra 05 (convenções) para commit |
+| Modo Review ativado | Regra 03 completa (protocolo de review) |
+| Modo Tutor ativado | Regra 03 completa (método de dicas progressivas) |
+| Publicar no GitHub / curar portfólio | `.claude/guides/guia-portfolio.md` |
+| Usar integração Codex | `.claude/guides/guia-codex.md` |
+| Setup de hooks ou enforcement | Regra 09 |
+| Dúvida sobre nomenclatura ou commits | Regra 05 |
+| Task requer referência a padrões anteriores | Consultar base de conhecimento externa (ver seção abaixo) |
+
+### Regras detalhadas (referência completa):
+
+```
+.claude/rules/
+├── 00-trava-seguranca.md     ← condições obrigatórias
+├── 01-principios.md          ← como pensar e codar
+├── 02-reconhecimento.md      ← mapeamento pré-implementação
+├── 03-modos-operacao.md      ← desenvolvimento / review / tutor
+├── 04-avaliacao-pos.md       ← verificação pós-implementação + testes
+├── 05-convencoes.md          ← nomenclatura, commits, branches
+├── 06-crura.md               ← fluxo CRURA + checklist unificado
+├── 07-integridade.md         ← regras invioláveis
+├── 08-registro-projeto.md    ← registry + recuperação de sessão
+└── 09-enforcement.md         ← hooks git automatizados
+```
+
+## Recuperação de Sessão
+
+Se a sessão anterior foi interrompida (timeout, limite de contexto, crash):
+
+1. Ler `registry.md` → última implementação e estado registrado
+2. Ler `tasks.md` → task ativa e último Log de Andamento
+3. Verificar branch atual (`git branch --show-current`) e último commit (`git log -1 --oneline`)
+4. Comparar estado real vs registrado. Reportar divergências ao usuário.
+5. Retomar do ponto documentado no Log de Andamento.
+
+## Base de Conhecimento Externa
+
+Caminho: C:\Users\lucas\OneDrive\Desktop\llm-wiki\wiki\
+Índice: wiki/index.md
+
+**Regras de uso:**
+- APENAS CONSULTA — não modificar, criar ou atualizar arquivos nesta pasta
+- Consultar antes de: decidir stack, investigar bugs recorrentes, tomar decisões arquiteturais
+- O índice `index.md` é o ponto de entrada para navegação
+
+## Informações do Projeto
 
 - **Nome:** agr1model
 - **Stack:** JavaScript (Google Earth Engine)
+- **Repositório:** LukeSantossz/agr1model
 - **Estrutura:** scripts/ndwi/, scripts/utils/, docs/, data/
 
-## Instrucoes Obrigatorias
-
-Antes de qualquer implementacao, leia na ordem:
-
-1. `.ai/rules/00-trava-seguranca.md`
-2. `.ai/rules/01-principios.md`
-3. `.ai/rules/02-reconhecimento.md`
-4. `.ai/rules/03-modos-operacao.md`
-5. `.ai/rules/04-avaliacao-pos.md`
-6. `.ai/rules/05-convencoes.md`
-7. `.ai/rules/06-crura.md`
-8. `.ai/rules/07-integridade.md`
-9. `.ai/rules/08-registro-projeto.md`
-10. `.ai/rules/09-enforcement.md`
-11. `.ai/registry.md` — estado atual do projeto
-
-## Fluxo Resumido
-
-1. Task registrada em `.ai/tasks.md`
-2. Modo declarado (Desenvolvimento / Review / Tutor)
-3. Reconhecimento da codebase
-4. Implementacao seguindo principios e convencoes
-5. Avaliacao pos-implementacao
-6. Atualizacao do `.ai/registry.md`
-7. CRURA — Change -> Review -> Upload -> Review Again -> Auto-Revisao
-
-## Convencoes
+## Convenções
 
 - **Commits:** `type(scope): subject` — sem body, sem co-authored-by
 - **Branches:** `type/TASK-NNN-descricao-curta`
-- **Tasks:** complexidade obrigatoria (patch/minor/major)
+- **Tasks:** complexidade obrigatória (patch/minor/major)
 - **Nomenclatura:** VAR Method (Data, Info, Collection, Image, Geometry, Filter, Reducer, Chart, Params)

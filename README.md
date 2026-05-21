@@ -87,7 +87,7 @@ agr1model/
 │   └── utils/         # Shared utility functions
 ├── docs/              # Technical documentation and references
 ├── data/              # Sample data and exported results
-├── .ai/               # AI agent configuration and rules
+├── .claude/           # AI agent configuration and rules
 └── README.md
 ```
 
