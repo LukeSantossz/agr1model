@@ -18,6 +18,7 @@
 
 | # | Data | Task | Complexidade | Escopo Alterado | Resultado | Observações |
 |---|------|------|--------------|-----------------|-----------|-------------|
+| 22 | 2026-05-28 | TASK-021 | minor | 5 arquivos — scripts/ndwi/01-04 + utils | aprovado | Paleta NDWI divergente ±0.5 e legenda `ui.Panel` reutilizável (`criarLegendaNDWI`) |
 | 21 | 2026-05-20 | TASK-019 | minor | 2 arquivos — docs/ndwi-formulacao.md, registry.md | aprovado | Documenta formulação NDWI (McFeeters) e justifica a escolha |
 | 20 | 2026-05-20 | TASK-027 | minor | 3 arquivos — CLAUDE.md, registry.md, tasks.md | aprovado | Adota Python na stack; resolve decisão pendente das TASK-023/024 |
 | 19 | 2026-05-20 | TASK-018 | minor | 2 arquivos — tasks.md, registry.md | aprovado | Mapeia backlog do Notion (TASK-019–026) e remove tasks_notion.md |
@@ -44,15 +45,16 @@
 
 > Atualizado a cada implementação ou verificação pós-pull. Reflete o snapshot mais recente do projeto.
 
-- **Última atualização:** 2026-05-20
-- **Último responsável:** Claude Code (Opus 4.7)
-- **Branch ativa:** docs/TASK-019-formulacao-ndwi
-- **Última task concluída:** TASK-019
-- **Backlog ativo:** TASK-020 a TASK-026 (pendentes; TASK-019 concluída)
+- **Última atualização:** 2026-05-28
+- **Último responsável:** Claude Code (Opus 4.8)
+- **Branch ativa:** feat/TASK-021-paletas-legenda-ndwi
+- **Última task concluída:** TASK-021
+- **Backlog ativo:** TASK-020, TASK-022 a TASK-026 (pendentes; TASK-021 concluída)
 
 ## Pendências Conhecidas
 
-- [nenhuma registrada]
+- **Scripts GEE sem testes automatizados:** os scripts em `scripts/ndwi/` e `scripts/utils/` rodam no GEE Code Editor (browser) e dependem de globais `ee`/`ui`/`Map`; não há framework de teste local. Verificação atual é por `node --check` (sintaxe) + revisão visual manual no Code Editor. Débito registrado (regra 04.4); avaliar harness de teste se a lógica crescer.
+- **TASK-020 bloqueada (dados não versionados):** o relatório interpretativo depende das saídas dos scripts (rankings municipais, histogramas, médias anuais), mas `data/` e `docs/` não contêm essas saídas — os scripts só as geram no GEE. Desbloqueio requer executar os scripts no GEE e versionar os CSVs/estatísticas exportados (ou TASK-026 como apoio).
 
 ## Rastreabilidade Notion → .claude
 
@@ -66,7 +68,7 @@
 | AGR-T6 | Composição de média anual | TASK-007 | Concluída |
 | AGR-T7 | Delta NDWI por município | TASK-008 + TASK-009 | Concluída |
 | AGR-T8 | Análise interpretativa (3 perguntas) | TASK-020 | Pendente (dados existem) |
-| AGR-T9 | Melhorar paletas + legenda | TASK-021 | Pendente |
+| AGR-T9 | Melhorar paletas + legenda | TASK-021 | Concluída |
 | AGR-T10 | NDWI via Landsat (2005-2015) | TASK-022 | Pendente |
 | AGR-T11 | Correlação NDWI × precipitação | TASK-023 | Pendente |
 | AGR-T12 | Diferença estatística entre anos | TASK-024 | Pendente |
@@ -76,6 +78,8 @@
 ## Decisões Técnicas Relevantes
 
 > Decisões tomadas durante implementações que afetam futuras tasks. Inclua justificativa breve.
+
+- **Visualização do NDWI: faixa ±0.5 + paleta divergente RdYlBu + legenda em utils (TASK-021):** `visParamsNDWI()` passou de `min/max ±1` para `±0.5` (água/não-água se separam em torno de NDWI=0 — McFeeters; valores por pixel em SP raramente excedem ±0.5; alinha às janelas dos gráficos dos scripts 02/03) e adotou a paleta RdYlBu com centro neutro `#ffffbf`, a mesma família dos mapas de variação. A legenda virou função reutilizável `criarLegendaNDWI()` (`ui.Panel` com barra de cor + rótulos) no módulo utils, consumida via `Map.add()` nos scripts 01-04. Mudança puramente visual — não afeta cálculo nem exportações.
 
 - **Formulação do NDWI = McFeeters (1996) (TASK-019):** Adotada a fórmula (Green − NIR)/(Green + NIR) — alvo: água superficial, coerente com o objetivo do projeto e com resolução de 10 m (B3/B8). A formulação de Gao (1996), voltada à umidade da vegetação, fica para avaliação futura (TASK-025). Detalhes e justificativa em `docs/ndwi-formulacao.md`.
 
