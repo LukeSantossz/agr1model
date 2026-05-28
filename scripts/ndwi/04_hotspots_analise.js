@@ -315,6 +315,9 @@ var variacaoVis = variacao.reproject({crs: 'EPSG:4326', scale: 500});
 // NDWI medio com paleta
 Map.addLayer(ndwiMediaGeralVis, visNDWI, 'NDWI Medio (2017-2025)', false);
 
+// Adiciona a legenda visual do NDWI ao mapa (sincronizada com visNDWI)
+Map.add(utils.criarLegendaNDWI(visNDWI));
+
 // Hotspots de agua (top 10%)
 Map.addLayer(hotspotsVis.selfMask(), {palette: ['#0571b0']}, 'Hotspots de Agua (Top 10%)', true);
 

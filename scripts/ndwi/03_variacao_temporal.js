@@ -284,6 +284,9 @@ Map.addLayer(ndwi2017Vis, visNDWI, 'NDWI 2017', false);
 // Adiciona NDWI de 2025
 Map.addLayer(ndwi2025Vis, visNDWI, 'NDWI 2025', false);
 
+// Adiciona a legenda visual do NDWI ao mapa (sincronizada com visNDWI)
+Map.add(utils.criarLegendaNDWI(visNDWI));
+
 // Parametros de visualizacao para variacao (escala divergente)
 // Azul = aumento de agua, Vermelho = reducao de agua
 var visVariacao = {

@@ -160,12 +160,9 @@ var ndwi2020 = colecao2020.median()
 
 Map.addLayer(ndwi2020, utils.visParamsNDWI(), 'NDWI 2020 (mediana)', false);
 
-// Adiciona legenda como texto no console
-print('LEGENDA NDWI:');
-print('  Azul escuro (1.0): Agua profunda');
-print('  Azul claro (0.5): Agua rasa');
-print('  Amarelo (0.0): Solo/vegetacao seca');
-print('  Vermelho (-0.5 a -1.0): Vegetacao verde');
+// Adiciona a legenda visual do NDWI ao mapa
+// Azul = agua (NDWI > 0), amarelo = limiar (~0), vermelho = vegetacao (NDWI < 0)
+Map.add(utils.criarLegendaNDWI());
 
 // ============================================================================
 // EXPORTACAO DA COLECAO NDWI (OPCIONAL)
