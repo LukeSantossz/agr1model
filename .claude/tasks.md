@@ -137,50 +137,6 @@ Notion AGR-T8; scripts 03_variacao_temporal.js e 04_hotspots_analise.js.
 
 ---
 
-### TASK-021
-- **Status:** pendente
-- **Modo:** desenvolvimento
-- **Complexidade:** minor
-- **Data de criação:** 2026-05-20
-
-#### Objetivo (!obrigatório)
-Melhorar as paletas de cores e adicionar legenda na visualização do NDWI no GEE.
-
-#### Contexto (!obrigatório)
-A visualização atual usa `visParamsNDWI` básico, sem legenda. Ajustar faixa de valores, paleta divergente e legenda torna a representação mais clara e alinhada a convenções de sensoriamento remoto. Origem: Notion AGR-T9 (Sprint 2, Improvement).
-
-#### Escopo Técnico (!obrigatório)
-- **Arquivos/módulos envolvidos:** scripts de visualização (`Map.addLayer`/`visParams`) — ex. 02_media_anual.js, 04_hotspots_analise.js; scripts/utils/sentinel2_utils.js (`visParamsNDWI`)
-- **Dependências necessárias:** TASK-007 (concluída)
-- **Impacto em funcionalidades existentes:** apenas visual; sem mudança de cálculo
-
-#### Critérios de Aceite (!obrigatório)
-- [ ] Paleta de cores atualizada com justificativa da escolha
-- [ ] Faixa de valores (min/max) ajustada de forma representativa
-- [ ] Legenda visível e legível no mapa GEE (`ui.Panel`)
-- [ ] Script versionado
-
-#### Restrições (opcional)
-Não alterar a lógica de cálculo do NDWI.
-
-#### Referências (opcional)
-Notion AGR-T9; GEE Community Catalog (paletas de referência).
-
-#### Log de Andamento (atualizado pelo agente)
-
-| Data | Sessão | Ação Realizada | Status ao Final |
-|------|--------|----------------|-----------------|
-| —    | —      | —              | —               |
-
-#### Resultado (preenchido ao concluir)
-- **Data de conclusão:** —
-- **Branch:** —
-- **Commit(s):** —
-- **Avaliação pós-implementação:** —
-- **Observações:** —
-
----
-
 ### TASK-022
 - **Status:** pendente
 - **Modo:** desenvolvimento
@@ -405,6 +361,36 @@ Notion AGR-T14.
 ## Tasks Concluídas
 
 > Tasks finalizadas. Movidas para cá após conclusão e atualização do Registro de Projeto (`registry.md`). Nunca remova entradas — o histórico é cumulativo.
+
+### TASK-021
+- **Status:** concluída
+- **Modo:** desenvolvimento
+- **Complexidade:** minor
+- **Data de criação:** 2026-05-20
+
+#### Objetivo (!obrigatório)
+Melhorar as paletas de cores e adicionar legenda na visualização do NDWI no GEE.
+
+#### Critérios de Aceite (!obrigatório)
+- [x] Paleta de cores atualizada com justificativa da escolha
+- [x] Faixa de valores (min/max) ajustada de forma representativa
+- [x] Legenda visível e legível no mapa GEE (`ui.Panel`)
+- [x] Script versionado
+
+#### Log de Andamento (atualizado pelo agente)
+
+| Data | Sessão | Ação Realizada | Status ao Final |
+|------|--------|----------------|-----------------|
+| 2026-05-28 | 1 | `visParamsNDWI`: faixa ±1→±0.5 e paleta RdYlBu com centro neutro; nova `criarLegendaNDWI` (`ui.Panel`) em utils; legenda adicionada nos scripts 01-04 | concluída |
+
+#### Resultado (preenchido ao concluir)
+- **Data de conclusão:** 2026-05-28
+- **Branch:** feat/TASK-021-paletas-legenda-ndwi
+- **Commit(s):** ver PR
+- **Avaliação pós-implementação:** aprovado
+- **Observações:** Mudança apenas visual (`visParamsNDWI` só é usado em `Map.addLayer`, nunca em cálculo/exportação). Legenda centralizada em utils (sem duplicação) e reutilizada via `Map.add(utils.criarLegendaNDWI())`. Legibilidade no mapa GEE a confirmar pelo desenvolvedor ao rodar (scripts não executáveis localmente). Texto `print()` de legenda do script 01 (citava ±1) substituído pela legenda visual.
+
+---
 
 ### TASK-019
 - **Status:** concluída

@@ -221,6 +221,9 @@ anosVisualizacao.forEach(function(ano) {
   Map.addLayer(imagemAno, visParams, 'NDWI Media ' + ano, visivel);
 });
 
+// Adiciona a legenda visual do NDWI ao mapa (sincronizada com visParams)
+Map.add(utils.criarLegendaNDWI(visParams));
+
 // ============================================================================
 // IMAGEM MULTIBANDA COM TODOS OS ANOS
 // ============================================================================

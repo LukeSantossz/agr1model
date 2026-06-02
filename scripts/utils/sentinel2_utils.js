@@ -202,27 +202,95 @@ var obterColecaoS2 = function(dataInicio, dataFim, geometria, maxNuvens) {
 // ============================================================================
 
 /**
- * Retorna parametros de visualizacao padrao para NDWI
- * Paleta de cores: vermelho (seco) -> amarelo -> azul (agua)
+ * Retorna parametros de visualizacao padrao para o NDWI.
  *
- * @return {Object} - Objeto com parametros de visualizacao
+ * Paleta divergente RdYlBu (ColorBrewer): vermelho = nao-agua (vegetacao/solo,
+ * NDWI < 0), amarelo palido = limiar (NDWI ~ 0), azul = agua (NDWI > 0). E a
+ * mesma familia divergente usada nos mapas de variacao (scripts 03 e 04), o que
+ * mantem a leitura de cor consistente em todo o projeto.
+ *
+ * Faixa -0.5 a +0.5 (em vez de -1 a +1) porque:
+ * - McFeeters (1996) separa agua (>0) de nao-agua (<0) em torno de zero, entao
+ *   centrar a paleta em 0 destaca a fronteira de interesse (ver docs/ndwi-formulacao.md);
+ * - sobre SP o NDWI por pixel raramente excede +-0.5 fora de corpos d'agua
+ *   permanentes, entao limitar a faixa amplia o contraste visual;
+ * - alinha com as janelas dos graficos (scripts 02 e 03 usam viewWindow -0.5 a 0.5).
+ *
+ * @return {Object} - Objeto com parametros de visualizacao (min, max, palette)
  */
 var visParamsNDWI = function() {
   return {
-    min: -1,      // Valor minimo do NDWI (vegetacao densa)
-    max: 1,       // Valor maximo do NDWI (agua)
+    min: -0.5,    // Limite inferior (nao-agua: vegetacao densa / solo)
+    max: 0.5,     // Limite superior (agua)
     palette: [
-      '#d73027',  // Vermelho escuro - vegetacao muito verde
+      '#d73027',  // Vermelho - vegetacao densa (NDWI bem negativo)
       '#f46d43',  // Laranja - vegetacao
       '#fdae61',  // Laranja claro - vegetacao moderada
-      '#fee090',  // Amarelo claro - solo/vegetacao seca
-      '#e0f3f8',  // Azul muito claro - umidade
+      '#fee090',  // Amarelo claro - solo / vegetacao seca
+      '#ffffbf',  // Amarelo palido - limiar agua/nao-agua (NDWI ~ 0)
+      '#e0f3f8',  // Azul muito claro - umidade / agua incipiente
       '#abd9e9',  // Azul claro - agua rasa
       '#74add1',  // Azul medio - agua
-      '#4575b4',  // Azul escuro - agua profunda
-      '#313695'   // Azul muito escuro - agua muito profunda
+      '#4575b4'   // Azul escuro - agua profunda
     ]
   };
+};
+
+// ============================================================================
+// FUNCAO: Legenda visual do NDWI (painel para o mapa)
+// ============================================================================
+
+/**
+ * Cria uma legenda visual (ui.Panel) para o NDWI, com barra de cor continua e
+ * rotulos de minimo, centro e maximo. Uso: Map.add(criarLegendaNDWI()).
+ *
+ * Reaproveita a paleta e a faixa de visParamsNDWI(), mantendo a legenda sempre
+ * sincronizada com o que e desenhado no mapa.
+ *
+ * @param {Object} vis - Parametros de visualizacao (opcional). Default: visParamsNDWI().
+ * @return {ui.Panel} - Painel de legenda pronto para adicionar ao mapa.
+ */
+var criarLegendaNDWI = function(vis) {
+  // Usa os parametros padrao do NDWI se nenhum for fornecido
+  vis = vis || visParamsNDWI();
+
+  // Titulo da legenda
+  var titulo = ui.Label('NDWI', {
+    fontWeight: 'bold',
+    fontSize: '14px',
+    margin: '0 0 4px 0'
+  });
+
+  // Barra de cor continua: um gradiente horizontal (longitude 0->1) renderizado
+  // com a mesma paleta do mapa. Padrao oficial de color bar do GEE Code Editor.
+  var barraCor = ui.Thumbnail({
+    image: ee.Image.pixelLonLat().select('longitude'),
+    params: {
+      bbox: [0, 0, 1, 0.1],
+      dimensions: '200x12',
+      format: 'png',
+      min: 0,
+      max: 1,
+      palette: vis.palette
+    },
+    style: {stretch: 'horizontal', margin: '0', maxHeight: '16px'}
+  });
+
+  // Rotulos de minimo, centro e maximo distribuidos sob a barra
+  var rotulos = ui.Panel({
+    widgets: [
+      ui.Label(vis.min + ' (nao-agua)', {margin: '2px 0 0 0', fontSize: '11px'}),
+      ui.Label('0', {margin: '2px 0 0 0', fontSize: '11px', textAlign: 'center', stretch: 'horizontal'}),
+      ui.Label('+' + vis.max + ' (agua)', {margin: '2px 0 0 0', fontSize: '11px'})
+    ],
+    layout: ui.Panel.Layout.flow('horizontal')
+  });
+
+  // Painel da legenda posicionado no canto inferior esquerdo do mapa
+  return ui.Panel({
+    widgets: [titulo, barraCor, rotulos],
+    style: {position: 'bottom-left', padding: '8px', backgroundColor: 'white'}
+  });
 };
 
 // ============================================================================
@@ -238,6 +306,7 @@ exports.carregarLimiteSP = carregarLimiteSP;
 exports.carregarMunicipiosSP = carregarMunicipiosSP;
 exports.obterColecaoS2 = obterColecaoS2;
 exports.visParamsNDWI = visParamsNDWI;
+exports.criarLegendaNDWI = criarLegendaNDWI;
 
 // Exporta constantes
 exports.ASSET_BASE = ASSET_BASE;
